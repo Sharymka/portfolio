@@ -35,6 +35,8 @@ The product should not feel like a static CV. It should feel like a carefully de
 
 Detailed page composition, section goals, transitions, and storytelling logic are defined in `docs/planning/INFORMATION_ARCHITECTURE.md`.
 
+Section-level content strategy, Hero concepts, AI question strategy, and content self-review are defined in `docs/planning/CONTENT_STRATEGY.md`.
+
 Wireframe-level page composition is defined in `docs/planning/WIREFRAMES.md`.
 
 ## MVP
