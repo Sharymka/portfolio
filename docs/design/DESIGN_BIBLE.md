@@ -8,6 +8,18 @@ The design should express professional clarity, technical confidence, and calm p
 
 The product should feel modern and carefully built, but not flashy. Every visual element must have a purpose.
 
+## Approved Visual Concept
+
+The approved design concept is **Powder Precision Tech**.
+
+Formula:
+
+> Powder-white premium interface + pale blue atmospheric gradient + ink-blue typography + mineral-blue accent + thin blue-mist lines + precise product motion.
+
+This concept keeps the product light, calm, elegant, modern, and technological without relying on dark UI, neon, cyberpunk aesthetics, heavy glassmorphism, or generic developer-portfolio visuals.
+
+The interface should feel like a premium digital product: precise, airy, composed, and technically credible.
+
 ## Mood
 
 - Modern
@@ -18,6 +30,69 @@ The product should feel modern and carefully built, but not flashy. Every visual
 - Clean
 - Confident
 - Not overloaded
+- Powder-light
+- Elegant
+- Precise
+
+## Emotional Goals
+
+The interface should create a quiet emotional pull. It must remain minimal, but it should not feel empty, generic, or emotionally flat.
+
+After opening the site, the viewer should feel:
+
+- calm;
+- confident in the developer's quality;
+- a sense of care and attention to detail;
+- professional trust;
+- subtle curiosity to continue reading;
+- that the product was designed intentionally, not assembled from a template.
+
+The interface must not feel:
+
+- boring;
+- faceless;
+- corporate;
+- template-like;
+- cold;
+- overloaded.
+
+Minimalism should be used as a sign of control and confidence. Empty space must support rhythm, hierarchy, and attention rather than becoming unused blankness.
+
+## Brand Personality
+
+Portfolio should feel like a person with a clear professional character:
+
+- calm;
+- confident;
+- modern;
+- curious;
+- engineering-minded;
+- open;
+- attentive to details;
+- precise without being rigid;
+- warm without being informal.
+
+The product should avoid marketing cliches. It should communicate through clarity, restraint, and good judgment.
+
+## First Impression
+
+In the first 10 seconds, the site should feel:
+
+- modern;
+- unusual enough to be memorable;
+- accurate;
+- premium;
+- technological;
+- calm;
+- easy to understand.
+
+It should not look:
+
+- ornate;
+- overloaded;
+- too experimental;
+- visually loud;
+- like a typical developer portfolio template.
 
 ## UX Principles
 
@@ -45,17 +120,65 @@ Rules:
 
 The color system should use:
 
-- neutral base colors;
+- powder-white and porcelain base colors;
+- a pale blue atmospheric background gradient;
+- a barely visible pearl-powder warmth in surfaces and highlights;
+- ink-blue text colors;
 - one primary accent color;
+- thin blue-mist structural lines;
 - restrained semantic colors only when needed;
 - sufficient contrast for text and interactive states.
 
 Rules:
 
 - Avoid one-note palettes dominated by a single hue family.
-- Avoid heavy gradients as the main visual identity.
+- Avoid gray as the emotional foundation of the product.
+- Avoid beige, cream, tan, or sandy palettes as the warmth mechanism.
+- Add warmth through very low-chroma pearl, powder, and soft blush undertones.
+- Use the background gradient as atmosphere, not decoration.
+- Avoid heavy, saturated, or visually loud gradients.
 - Do not use many accent colors.
 - Use color to create hierarchy and meaning, not decoration.
+- Do not use neon, acid colors, or cyberpunk color combinations.
+- Do not use dark backgrounds as the primary visual identity.
+
+The palette should feel less cold than a typical SaaS interface. The warmth must be subtle: it should make the interface feel more premium and human without changing the concept into beauty, fashion, beige editorial, or lifestyle branding.
+
+### Theme Tokens v1
+
+Approved core palette:
+
+| Token | Value | Role |
+| --- | --- | --- |
+| `--background` | `oklch(0.986 0.012 238)` | Main powder-blue page background |
+| `--foreground` | `oklch(0.22 0.045 245)` | Primary ink-blue text |
+| `--surface` | `oklch(0.996 0.007 50)` | Warm porcelain surface |
+| `--surface-soft` | `oklch(0.968 0.018 232)` | Soft powder-blue surface |
+| `--surface-warm` | `oklch(0.982 0.014 35)` | Pearl-powder highlight surface |
+| `--muted` | `oklch(0.94 0.018 235)` | Secondary quiet areas |
+| `--muted-foreground` | `oklch(0.43 0.04 245)` | Secondary readable text |
+| `--border` | `oklch(0.88 0.028 235)` | Thin blue-mist lines |
+| `--border-strong` | `oklch(0.75 0.045 235)` | Active or emphasized borders |
+| `--primary` | `oklch(0.52 0.095 220)` | Mineral-blue primary accent |
+| `--primary-foreground` | `oklch(0.99 0.006 235)` | Text on primary surfaces |
+| `--primary-soft` | `oklch(0.91 0.045 220)` | Soft primary hover or accent surface |
+| `--accent` | `oklch(0.72 0.075 200)` | Dusty aqua-blue accent |
+| `--accent-soft` | `oklch(0.94 0.035 205)` | Pale accent background |
+| `--ring` | `oklch(0.68 0.08 220)` | Focus ring color |
+| `--destructive` | `oklch(0.58 0.13 25)` | Muted dusty-rose destructive color |
+
+Approved background gradient:
+
+```css
+linear-gradient(
+  135deg,
+  oklch(0.996 0.007 50) 0%,
+  oklch(0.982 0.016 235) 46%,
+  oklch(0.958 0.032 220) 100%
+)
+```
+
+The gradient must remain subtle and atmospheric. Do not add decorative blobs, gradient orbs, or bokeh-style elements.
 
 ## Typography
 
@@ -69,6 +192,48 @@ Rules:
 - Do not scale font size directly with viewport width.
 - Keep line length comfortable on desktop.
 - Preserve readability on mobile.
+- Avoid heavy weights above `600` unless a specific accessibility or hierarchy reason requires it.
+- Use mono typography only for technical labels, metadata, code-like values, and the AI section when it improves clarity.
+
+### Font Pair Review
+
+All considered font pairs must be free, web-ready, available through Google Fonts, and support both Cyrillic and Latin.
+
+| Pair | Emotion | Fit |
+| --- | --- | --- |
+| `Manrope` + `IBM Plex Mono` | Soft, premium, contemporary, calm | Best balance for Powder Precision Tech: Manrope brings elegance and warmth, while IBM Plex Mono keeps the technical signal precise. |
+| `Onest` + `JetBrains Mono` | Modern, friendly, product-like | Strong for a clean digital product, but slightly more casual and less premium than Manrope. |
+| `Commissioner` + `Roboto Mono` | Structured, rational, confident | Good engineering clarity, but can feel more institutional and less emotionally distinctive. |
+| `Golos Text` + `IBM Plex Mono` | Clear, trustworthy, Cyrillic-native | Very readable and practical, but less memorable for a premium portfolio identity. |
+
+Approved direction: **Manrope + IBM Plex Mono**.
+
+Manrope should be used for headings, body copy, buttons, and general UI. It gives the interface a softer premium digital feeling while staying precise and readable. IBM Plex Mono should be used sparingly for technical labels, metadata, stack details, and the AI section when a stronger engineering signal is useful.
+
+### Typography Tokens v1
+
+Approved font direction:
+
+| Token | Font |
+| --- | --- |
+| `--font-sans` | `Manrope` |
+| `--font-heading` | `Manrope` |
+| `--font-mono` | `IBM Plex Mono` |
+
+Approved type scale:
+
+| Token | Size / Line-height / Weight | Use |
+| --- | --- | --- |
+| `display` | `56px / 1.05 / 500` | Desktop hero headline |
+| `display-mobile` | `40px / 1.08 / 500` | Mobile hero headline |
+| `h1` | `48px / 1.1 / 500` | Large page-level heading |
+| `h2` | `32px / 1.18 / 500` | MVP section headings |
+| `h3` | `22px / 1.3 / 500` | Block headings |
+| `body-lg` | `18px / 1.7 / 400` | Lead text |
+| `body` | `16px / 1.7 / 400` | Primary body text |
+| `body-sm` | `14px / 1.6 / 400` | Secondary text |
+| `label` | `13px / 1.3 / 500` | Buttons, labels, compact UI |
+| `meta` | `12px / 1.4 / 500` | Technical metadata and mono labels |
 
 ## Grid
 
@@ -81,6 +246,17 @@ Rules:
 - Keep alignment consistent across sections.
 - Avoid complex grid behavior before the MVP requires it.
 
+### Layout Tokens v1
+
+| Token | Value |
+| --- | --- |
+| `container-narrow` | `720px` |
+| `container-default` | `1120px` |
+| `container-wide` | `1280px` |
+| `content-readable` | `680px` |
+
+Main body copy should stay within a comfortable readable width. Wider containers may be used for section composition, structured rows, and the AI interface.
+
 ## Spacing
 
 Spacing should create calm and focus.
@@ -92,6 +268,34 @@ Rules:
 - Avoid cramped content blocks.
 - Avoid decorative empty space that weakens scanning.
 
+### Spacing Tokens v1
+
+| Token | Value |
+| --- | --- |
+| `space-1` | `4px` |
+| `space-2` | `8px` |
+| `space-3` | `12px` |
+| `space-4` | `16px` |
+| `space-5` | `20px` |
+| `space-6` | `24px` |
+| `space-8` | `32px` |
+| `space-10` | `40px` |
+| `space-12` | `48px` |
+| `space-16` | `64px` |
+| `space-20` | `80px` |
+| `space-24` | `96px` |
+| `space-32` | `128px` |
+
+Approved section rhythm:
+
+| Token | Value |
+| --- | --- |
+| `section-y-mobile` | `64px` |
+| `section-y-tablet` | `80px` |
+| `section-y-desktop` | `112px` |
+| `hero-y-mobile` | `96px` |
+| `hero-y-desktop` | `144px` |
+
 ## Border Radius
 
 Border radius should be subtle.
@@ -101,6 +305,35 @@ Rules:
 - Use small to medium radius for cards, panels, inputs, and buttons.
 - Avoid overly rounded card-heavy visuals.
 - Keep radius consistent across reusable UI primitives.
+- Avoid excessive pill-shaped UI unless the component role clearly calls for it.
+
+### Radius Tokens v1
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `radius-sm` | `6px` | Badges and small controls |
+| `radius-md` | `10px` | Buttons and inputs |
+| `radius-lg` | `14px` | Panels |
+| `radius-xl` | `18px` | Large surfaces, used sparingly |
+
+## Borders and Shadows
+
+Depth should primarily come from spacing, color surfaces, and thin borders rather than heavy shadows.
+
+Approved tokens:
+
+| Token | Value |
+| --- | --- |
+| `border-subtle` | `1px solid var(--border)` |
+| `border-strong` | `1px solid var(--border-strong)` |
+| `shadow-soft` | `0 18px 60px oklch(0.52 0.095 220 / 0.08)` |
+| `shadow-focus` | `0 0 0 3px oklch(0.68 0.08 220 / 0.22)` |
+
+Rules:
+
+- Use shadows rarely.
+- Do not create a card-heavy landing page look.
+- Prefer blue-mist borders for structure.
 
 ## Components
 
@@ -114,6 +347,33 @@ Rules:
 - Forms and inputs must include labels or accessible names.
 - Important UI elements should expose stable `data-testid` attributes.
 - Components should support responsive behavior without layout shifts.
+
+### Component Direction v1
+
+Buttons:
+
+- Primary buttons use the mineral-blue primary accent.
+- Secondary buttons use porcelain surfaces with blue-mist borders.
+- Ghost buttons stay quiet and use `--primary-soft` or `--accent-soft` on hover.
+- Focus states must be visible and aligned with `--ring`.
+
+Panels:
+
+- Use `--surface`, subtle borders, and `radius-lg`.
+- Avoid heavy shadows.
+- Use panels for meaningful grouping, not decoration.
+
+Badges:
+
+- Use pale accent surfaces.
+- Keep labels compact and precise.
+- Mono typography may be used for technical badges.
+
+Inputs:
+
+- Use porcelain surfaces and subtle borders.
+- Use `--ring` for focus states.
+- Placeholder text should use muted foreground color.
 
 ## Icons
 
@@ -137,6 +397,24 @@ Rules:
 - Respect reduced motion preferences.
 - Do not use motion to hide weak layout or unclear content.
 - Framer Motion should be used only where it adds meaningful control.
+
+### Motion Tokens v1
+
+| Token | Value |
+| --- | --- |
+| `duration-fast` | `140ms` |
+| `duration-base` | `220ms` |
+| `duration-slow` | `420ms` |
+| `ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` |
+| `ease-soft` | `cubic-bezier(0.16, 1, 0.3, 1)` |
+| `stagger-sm` | `60ms` |
+
+Rules:
+
+- Hover and focus transitions should feel quick and precise.
+- Section reveals should use soft fade and slight movement only.
+- The AI section may use slightly more product-like state transitions.
+- Avoid parallax, scroll hijacking, bouncing, and decorative looping motion.
 
 ## Accessibility
 
@@ -164,3 +442,15 @@ Rules:
 - No generic landing-page fluff.
 - No sections outside the approved MVP.
 - The interface should look engineered, not generated.
+
+## MVP Section Treatment
+
+Hero is the only place where the interface may be slightly more emotional. It should create a strong first impression through composition, spacing, typography, and the atmospheric gradient. All following sections must be visually calmer so the page has a clear hierarchy and does not become uniformly expressive.
+
+| Section | Visual Treatment |
+| --- | --- |
+| Greeting | Most spacious section, atmospheric gradient, strong but calm typography |
+| What I Can Bring to a Team | Structured rows or compact panels, not a card grid |
+| Commercial Experience | Timeline or evidence rows with thin blue-mist lines |
+| How I Approach Development | Editorial rhythm with clear principles |
+| Ask My AI | Most product-like block, light panel, precise states, restrained technology signal |

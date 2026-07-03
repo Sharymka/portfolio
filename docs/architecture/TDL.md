@@ -179,3 +179,18 @@ Consequences:
 
 - State management remains local and explicit.
 - Zustand may be reconsidered only if shared client state becomes meaningful and repeated.
+
+## ADR-014: Use Documented Design Tokens for the Visual System
+
+Status: Accepted
+
+Context: The approved design direction is Powder Precision Tech. The project needs a consistent visual system that can be implemented in Tailwind CSS and shared UI primitives without scattering arbitrary color, spacing, typography, and motion values across components.
+
+Decision: Use the approved Theme & Design Tokens v1 from `docs/design/DESIGN_BIBLE.md` as the source of truth for future visual implementation. Tokens should be implemented with CSS custom properties, OKLCH color values, and Tailwind-compatible mappings when the implementation task begins. The approved font direction is Manrope for primary typography and IBM Plex Mono for technical metadata.
+
+Consequences:
+
+- UI implementation must use documented tokens instead of ad hoc visual values.
+- The design can stay consistent across MVP sections and shared components.
+- The light powder-blue visual identity can be changed centrally if the system evolves.
+- Font loading, CSS variable mapping, and Tailwind integration must be handled in a future implementation task, not during documentation-only work.
