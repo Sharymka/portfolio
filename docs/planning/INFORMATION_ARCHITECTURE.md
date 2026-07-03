@@ -70,7 +70,7 @@ Composition direction:
 
 Primary CTA:
 
-- `Ask my AI`
+- `See how I work`
 
 Optional secondary CTA:
 
@@ -190,8 +190,8 @@ Desired emotion:
 
 CTA:
 
-- `Ask my AI about my experience`
-- `Explore more through AI`
+- No heavy CTA required.
+- A quiet transition may point to `Ask My AI`.
 
 Transition to next section:
 
@@ -228,7 +228,7 @@ Desired emotion:
 
 Primary CTA:
 
-- `Ask a question`
+- `Ask my AI`
 
 Transition after section:
 
