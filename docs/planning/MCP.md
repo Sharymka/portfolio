@@ -35,6 +35,8 @@ The product should not feel like a static CV. It should feel like a carefully de
 
 Detailed page composition, section goals, transitions, and storytelling logic are defined in `docs/planning/INFORMATION_ARCHITECTURE.md`.
 
+Wireframe-level page composition is defined in `docs/planning/WIREFRAMES.md`.
+
 ## MVP
 
 The MVP structure is fixed and must not be changed until MVP completion.

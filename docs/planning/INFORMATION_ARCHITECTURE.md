@@ -43,6 +43,7 @@ The user should immediately see:
 - the developer's name or clear professional identity;
 - the Frontend Developer role;
 - a concise positioning statement;
+- the developer's photo as a human trust signal;
 - a clear value signal focused on product quality, architecture, and maintainable frontend work;
 - one primary action.
 
@@ -64,6 +65,7 @@ Composition direction:
 
 - generous whitespace;
 - strong but calm typography;
+- required photo;
 - minimal visual elements;
 - the atmospheric Powder Precision Tech background may be most expressive here;
 - no long biography, dense stack list, or overloaded proof.
