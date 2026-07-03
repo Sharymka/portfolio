@@ -33,6 +33,8 @@ The product should not feel like a static CV. It should feel like a carefully de
 5. The user interacts with or reviews the AI-assisted section.
 6. The user has enough confidence to proceed with contact or interview invitation.
 
+Detailed page composition, section goals, transitions, and storytelling logic are defined in `docs/planning/INFORMATION_ARCHITECTURE.md`.
+
 ## MVP
 
 The MVP structure is fixed and must not be changed until MVP completion.
