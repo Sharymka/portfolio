@@ -37,6 +37,10 @@ Detailed page composition, section goals, transitions, and storytelling logic ar
 
 Section-level content strategy, Hero concepts, AI question strategy, and content self-review are defined in `docs/planning/CONTENT_STRATEGY.md`.
 
+Visual composition, section layout intent, responsive rhythm, and pre-implementation layout recommendations are defined in `docs/planning/UI_LAYOUT_VISUAL_COMPOSITION.md`.
+
+Hero UX, final Hero content recommendation, CTA text, stack line, and first-screen perception are defined in `docs/planning/HERO_UX_CONTENT.md`.
+
 Wireframe-level page composition is defined in `docs/planning/WIREFRAMES.md`.
 
 ## MVP

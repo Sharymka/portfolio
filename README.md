@@ -124,6 +124,8 @@ Project documentation is the source of truth for development:
 - `docs/ai/AGENTS.md`: rules for AI agents, architecture, workflow, and engineering standards.
 - `docs/planning/MCP.md`: Master Construction Plan with product vision, MVP, metrics, and roadmap.
 - `docs/planning/CONTENT_STRATEGY.md`: section-level content strategy, Hero concepts, AI question strategy, and content self-review.
+- `docs/planning/UI_LAYOUT_VISUAL_COMPOSITION.md`: visual composition, responsive layout intent, scroll rhythm, and UI implementation recommendations.
+- `docs/planning/HERO_UX_CONTENT.md`: Hero content variants, final recommendation, first-screen UX, CTA text, and next implementation notes.
 - `docs/architecture/TDL.md`: Technical Decision Log using ADR-style decisions.
 - `docs/design/DESIGN_BIBLE.md`: design philosophy, visual system, motion, and accessibility rules.
 - `docs/design/PROJECT_IDENTITY.md`: intended product feeling and professional identity.
