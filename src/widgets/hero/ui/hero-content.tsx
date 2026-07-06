@@ -6,6 +6,10 @@ import { heroContent } from "../model/hero-content"
 
 const revealEase = [0.16, 1, 0.3, 1] as const
 
+type HeroContentProps = {
+  revealDelay?: number
+}
+
 function HighlightedHeadline() {
   return (
     <>
@@ -26,7 +30,7 @@ function HighlightedHeadline() {
   )
 }
 
-function HeroContent() {
+function HeroContent({ revealDelay = 0 }: HeroContentProps) {
   const shouldReduceMotion = useReducedMotion()
   const itemInitial = shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }
   const itemAnimate = shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
@@ -44,7 +48,7 @@ function HeroContent() {
         visible: {
           transition: {
             staggerChildren: shouldReduceMotion ? 0.03 : 0.14,
-            delayChildren: shouldReduceMotion ? 0 : 0.08,
+            delayChildren: shouldReduceMotion ? 0 : revealDelay + 0.08,
           },
         },
       }}

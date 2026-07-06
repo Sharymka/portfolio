@@ -14,7 +14,7 @@ The approved design concept is **Powder Precision Tech**.
 
 Formula:
 
-> Powder-white premium interface + pale blue atmospheric gradient + ink-blue typography + mineral-blue accent + thin blue-mist lines + precise product motion.
+> Powder-white premium interface + light lavender-pink atmospheric gradient + deep ink typography + restrained violet accent + soft glass surfaces + precise product motion.
 
 This concept keeps the product light, calm, elegant, modern, and technological without relying on dark UI, neon, cyberpunk aesthetics, heavy glassmorphism, or generic developer-portfolio visuals.
 
@@ -121,11 +121,11 @@ Rules:
 The color system should use:
 
 - powder-white and porcelain base colors;
-- a pale blue atmospheric background gradient;
+- a very light lavender-pink atmospheric background gradient;
 - a barely visible pearl-powder warmth in surfaces and highlights;
-- ink-blue text colors;
-- one primary accent color;
-- thin blue-mist structural lines;
+- deep ink text colors;
+- one restrained violet primary accent;
+- thin lavender-mist structural lines;
 - restrained semantic colors only when needed;
 - sufficient contrast for text and interactive states.
 
@@ -150,21 +150,21 @@ Approved core palette:
 
 | Token | Value | Role |
 | --- | --- | --- |
-| `--background` | `oklch(0.986 0.012 238)` | Main powder-blue page background |
-| `--foreground` | `oklch(0.22 0.045 245)` | Primary ink-blue text |
-| `--surface` | `oklch(0.996 0.007 50)` | Warm porcelain surface |
-| `--surface-soft` | `oklch(0.968 0.018 232)` | Soft powder-blue surface |
-| `--surface-warm` | `oklch(0.982 0.014 35)` | Pearl-powder highlight surface |
-| `--muted` | `oklch(0.94 0.018 235)` | Secondary quiet areas |
-| `--muted-foreground` | `oklch(0.43 0.04 245)` | Secondary readable text |
-| `--border` | `oklch(0.88 0.028 235)` | Thin blue-mist lines |
-| `--border-strong` | `oklch(0.75 0.045 235)` | Active or emphasized borders |
-| `--primary` | `oklch(0.52 0.095 220)` | Mineral-blue primary accent |
-| `--primary-foreground` | `oklch(0.99 0.006 235)` | Text on primary surfaces |
-| `--primary-soft` | `oklch(0.91 0.045 220)` | Soft primary hover or accent surface |
-| `--accent` | `oklch(0.72 0.075 200)` | Dusty aqua-blue accent |
-| `--accent-soft` | `oklch(0.94 0.035 205)` | Pale accent background |
-| `--ring` | `oklch(0.68 0.08 220)` | Focus ring color |
+| `--background` | `#E5DFFB` | Main lavender-powder page background |
+| `--foreground` | `#181D36` | Primary deep ink text |
+| `--surface` | `rgba(255, 255, 255, 0.45)` | Frosted porcelain surface |
+| `--surface-soft` | `#F4ECFC` | Soft lavender surface |
+| `--surface-warm` | `#FBD2F7` | Pearl-pink highlight surface |
+| `--muted` | `#F0E8FE` | Secondary quiet areas |
+| `--muted-foreground` | `#3E3C59` | Secondary readable text |
+| `--border` | `rgba(255, 255, 255, 0.6)` | Thin soft-glass lines |
+| `--border-strong` | `#C8B6F0` | Active or emphasized borders |
+| `--primary` | `#8B55DE` | Restrained violet primary accent |
+| `--primary-foreground` | `#FFFFFF` | Text on primary surfaces |
+| `--primary-soft` | `#E9E2FE` | Soft primary hover or accent surface |
+| `--accent` | `#B65AD0` | Quiet purple-pink accent |
+| `--accent-soft` | `#F8E8FC` | Pale pink-lavender accent background |
+| `--ring` | `rgba(139, 85, 222, 0.25)` | Focus ring color |
 | `--destructive` | `oklch(0.58 0.13 25)` | Muted dusty-rose destructive color |
 
 Approved background gradient:
@@ -172,13 +172,26 @@ Approved background gradient:
 ```css
 linear-gradient(
   135deg,
-  oklch(0.996 0.007 50) 0%,
-  oklch(0.982 0.016 235) 46%,
-  oklch(0.958 0.032 220) 100%
+  #E5DFFB 0%,
+  #E9E2FE 25%,
+  #F0E8FE 55%,
+  #FBD2F7 100%
 )
 ```
 
-The gradient must remain subtle and atmospheric. Do not add decorative blobs, gradient orbs, or bokeh-style elements.
+Hero gradient accent for the words `clear`, `usable`, and `maintainable`:
+
+```css
+linear-gradient(
+  90deg,
+  #7252D8 0%,
+  #8C55DC 38%,
+  #B65AD0 72%,
+  #D36AC8 100%
+)
+```
+
+The gradient must remain light, warm, and atmospheric. Do not add decorative blobs, gradient orbs, or bokeh-style elements.
 
 ## Typography
 
@@ -333,7 +346,7 @@ Rules:
 
 - Use shadows rarely.
 - Do not create a card-heavy landing page look.
-- Prefer blue-mist borders for structure.
+- Prefer soft lavender-mist or frosted-white borders for structure.
 
 ## Components
 
@@ -352,8 +365,8 @@ Rules:
 
 Buttons:
 
-- Primary buttons use the mineral-blue primary accent.
-- Secondary buttons use porcelain surfaces with blue-mist borders.
+- Primary buttons use the restrained violet primary accent.
+- Secondary buttons use porcelain surfaces with lavender-mist or frosted-white borders.
 - Ghost buttons stay quiet and use `--primary-soft` or `--accent-soft` on hover.
 - Focus states must be visible and aligned with `--ring`.
 
@@ -451,6 +464,6 @@ Hero is the only place where the interface may be slightly more emotional. It sh
 | --- | --- |
 | Greeting | Most spacious section, atmospheric gradient, strong but calm typography |
 | What I Can Bring to a Team | Structured rows or compact panels, not a card grid |
-| Commercial Experience | Timeline or evidence rows with thin blue-mist lines |
+| Commercial Experience | Timeline or evidence rows with thin lavender-mist lines |
 | How I Approach Development | Editorial rhythm with clear principles |
 | Ask My AI | Most product-like block, light panel, precise states, restrained technology signal |

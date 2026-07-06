@@ -1,10 +1,14 @@
 import { Container } from "@/shared/ui/container"
 import { Section } from "@/shared/ui/section"
+import { heroMotion } from "../model/hero-motion"
 import { HeroContent } from "./hero-content"
 import { HeroImage } from "./hero-image"
+import { IntroOverlay } from "./intro-overlay"
 import { ScrollIndicator } from "./scroll-indicator"
 
 function HeroSection() {
+  const revealDelay = heroMotion.intro.heroRevealDelay
+
   return (
     <Section
       spacing="loose"
@@ -32,15 +36,16 @@ function HeroSection() {
 
         <div className="grid flex-1 items-center gap-14 lg:grid-cols-[minmax(0,42rem)_minmax(24rem,29rem)] lg:justify-between lg:gap-16">
           <div className="flex flex-col">
-            <HeroContent />
+            <HeroContent revealDelay={revealDelay} />
           </div>
-          <HeroImage />
+          <HeroImage revealDelay={revealDelay} />
         </div>
 
         <div className="mt-14 flex justify-start lg:mt-20">
-          <ScrollIndicator />
+          <ScrollIndicator revealDelay={revealDelay} />
         </div>
       </Container>
+      <IntroOverlay />
     </Section>
   )
 }

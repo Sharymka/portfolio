@@ -67,7 +67,7 @@ The rhythm should move from emotional to practical:
 - Let the Hero be wider and more atmospheric than the rest of the page.
 - Keep main text within comfortable readable width.
 - Use wide composition only when it helps compare information.
-- Use thin blue-mist lines instead of heavy boxes.
+- Use thin lavender-mist or frosted-white lines instead of heavy boxes.
 - Use panels only for meaningful grouping, especially the AI interaction.
 - Keep dominant decorative treatment limited to the Hero background atmosphere.
 - Avoid repeated card grids.
@@ -159,7 +159,7 @@ Free Space:
 
 Decorative Elements:
 
-- Use the approved atmospheric powder-blue gradient as the main background treatment.
+- Use the approved atmospheric lavender-pink Hero gradient as the main background treatment.
 - Use thin lines, small labels, or barely visible structural accents only if they support alignment.
 - Do not use blobs, orbs, neon effects, or heavy glassmorphism.
 
@@ -401,7 +401,7 @@ Free Space:
 
 Decorative Elements:
 
-- Thin blue-mist lines can support timeline or evidence structure.
+- Thin lavender-mist lines can support timeline or evidence structure.
 - Use subtle metadata badges if needed.
 - Avoid heavy cards and resume-style boxes.
 
@@ -861,7 +861,7 @@ Is there enough air?
 
 Does the composition match the Design Bible?
 
-- Yes. It follows Powder Precision Tech, mobile-first layout, restrained motion, thin blue-mist structure, minimal decoration, and no card-heavy landing-page behavior.
+- Yes. It follows Powder Precision Tech, mobile-first layout, restrained motion, thin lavender-mist structure, minimal decoration, and no card-heavy landing-page behavior.
 
 Does the site create a desire to continue viewing?
 

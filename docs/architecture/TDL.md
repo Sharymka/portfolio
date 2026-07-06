@@ -192,5 +192,5 @@ Consequences:
 
 - UI implementation must use documented tokens instead of ad hoc visual values.
 - The design can stay consistent across MVP sections and shared components.
-- The light powder-blue visual identity can be changed centrally if the system evolves.
+- The light lavender-pink visual identity can be changed centrally if the system evolves.
 - Font loading, CSS variable mapping, and Tailwind integration must be handled in a future implementation task, not during documentation-only work.

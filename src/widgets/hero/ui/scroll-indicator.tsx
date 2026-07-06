@@ -8,7 +8,11 @@ import { heroContent } from "../model/hero-content"
 
 const revealEase = [0.16, 1, 0.3, 1] as const
 
-function ScrollIndicator() {
+type ScrollIndicatorProps = {
+  revealDelay?: number
+}
+
+function ScrollIndicator({ revealDelay = 0 }: ScrollIndicatorProps) {
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -18,7 +22,7 @@ function ScrollIndicator() {
       transition={
         shouldReduceMotion
           ? { duration: 0.18, delay: 0.12, ease: "linear" }
-          : { duration: 0.64, delay: 0.72, ease: revealEase }
+          : { duration: 0.64, delay: revealDelay + 0.72, ease: revealEase }
       }
     >
       <Link

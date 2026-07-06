@@ -14,11 +14,11 @@ The approved identity direction is **Powder Precision Tech**.
 
 Formula:
 
-> Powder-white premium interface + pale blue atmospheric gradient + ink-blue typography + mineral-blue accent + thin blue-mist lines + precise product motion.
+> Powder-white premium interface + light lavender-pink atmospheric gradient + deep ink typography + restrained violet accent + soft glass surfaces + precise product motion.
 
 The product should combine softness and precision:
 
-- softness through powder-white surfaces, pale blue atmosphere, generous spacing, and calm motion;
+- softness through powder-white surfaces, lavender-pink atmosphere, generous spacing, and calm motion;
 - precision through structured composition, crisp typography, thin lines, clear hierarchy, and controlled interaction states.
 
 The identity should not be gray-based. It should feel light, airy, elegant, and technological without becoming decorative, sweet, or cosmetic.
@@ -117,10 +117,10 @@ The visual identity should support this perception through consistent tokens, co
 Approved visual signals:
 
 - powder-white and porcelain surfaces;
-- pale blue atmospheric background gradient;
-- ink-blue typography;
-- mineral-blue primary accent;
-- blue-mist borders and separators;
+- light lavender-pink atmospheric background gradient;
+- deep ink typography;
+- restrained violet primary accent;
+- lavender-mist and frosted-white borders and separators;
 - generous whitespace;
 - precise typographic hierarchy;
 - small technical labels where useful;
@@ -155,4 +155,4 @@ The developer remains responsible for:
 - final review;
 - deployment readiness.
 
-The "Ask My AI" section should be the most product-like part of the MVP, but it must remain aligned with the same calm powder-light identity. It should feel useful, controlled, and trustworthy, not like a gimmick.
+The "Ask My AI" section should be the most product-like part of the MVP, but it must remain aligned with the same calm powder-light lavender identity. It should feel useful, controlled, and trustworthy, not like a gimmick.

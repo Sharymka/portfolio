@@ -7,7 +7,11 @@ import { heroContent } from "../model/hero-content"
 
 const imageEase = [0.16, 1, 0.3, 1] as const
 
-function HeroImage() {
+type HeroImageProps = {
+  revealDelay?: number
+}
+
+function HeroImage({ revealDelay = 0 }: HeroImageProps) {
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -22,7 +26,7 @@ function HeroImage() {
       transition={
         shouldReduceMotion
           ? { duration: 0.18, ease: "linear" }
-          : { duration: 0.88, delay: 0.24, ease: imageEase }
+          : { duration: 0.88, delay: revealDelay + 0.24, ease: imageEase }
       }
     >
       <div className="absolute -inset-4 rounded-[2.7rem] border border-white/70 bg-[#F8E8FC]/45 shadow-[0_30px_95px_rgba(248,208,240,0.36)]" />
