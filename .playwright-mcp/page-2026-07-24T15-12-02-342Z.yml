@@ -1,0 +1,236 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - button [ref=e6] [cursor=pointer]
+        - link [ref=e8] [cursor=pointer]:
+          - /url: https://nupix.ai
+    - main [ref=e9]:
+      - generic [ref=e14]:
+        - heading "Создай яркую ИИ -Фотосессию из обычного селфи" [level=1] [ref=e15]:
+          - text: Создай яркую
+          - generic [ref=e16]:
+            - generic [ref=e17]: ИИ
+            - generic [ref=e18]: "-Фотосессию"
+          - text: из обычного селфи
+        - list [ref=e19]:
+          - listitem [ref=e20]: • Превращаем ваши фото в фотосессию
+          - listitem [ref=e21]: • Десятки кадров в разных стилях
+          - listitem [ref=e22]: • Фото уже через ~1 минуту
+          - listitem [ref=e23]: • Без студий и фотографов
+        - link "Выбрать фотосессию" [ref=e24] [cursor=pointer]:
+          - /url: "#catalog"
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - heading "3 шага до твоей фотосессии" [level=2] [ref=e29]
+          - generic [ref=e30]: Всё, что нужно для стильных и ярких фотосессий
+        - generic [ref=e32]:
+          - generic [ref=e35]:
+            - generic [ref=e36]: ШАГ 1
+            - text: Загрузи свое фото
+          - generic [ref=e39]:
+            - generic [ref=e40]: ШАГ 2
+            - text: Выбери образ и сюжет
+          - generic [ref=e43]:
+            - generic [ref=e44]: ШАГ 3
+            - text: Получи результат
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - heading "Твоя фотосессия начинается здесь" [level=2] [ref=e48]
+          - generic [ref=e49]: Женские и мужские образы — от романтики и fashion до деловых портретов. Выбирай готовый сет и смотри, как ты будешь выглядеть.
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - button "Мужские" [ref=e53] [cursor=pointer]
+              - button "Женские" [ref=e54] [cursor=pointer]
+              - button "Парные" [ref=e55] [cursor=pointer]
+            - generic [ref=e56]:
+              - button "Все" [ref=e57] [cursor=pointer]
+              - button "Лето и отпуск" [ref=e58] [cursor=pointer]
+              - button "Casual и лайфстайл" [ref=e59] [cursor=pointer]
+              - button "Креатив и Арт" [ref=e60] [cursor=pointer]
+              - button "Природа и путешествия" [ref=e61] [cursor=pointer]
+              - button "Мода и стиль" [ref=e62] [cursor=pointer]
+              - button "Романтика и нежность" [ref=e63] [cursor=pointer]
+              - button "Бизнес и карьера" [ref=e64] [cursor=pointer]
+              - button "Винтаж" [ref=e65] [cursor=pointer]
+              - button "Цветы и сады" [ref=e66] [cursor=pointer]
+              - button "Брутальность и харизма" [ref=e67] [cursor=pointer]
+              - button "Деловой и успешный" [ref=e68] [cursor=pointer]
+              - button "Праздники" [ref=e69] [cursor=pointer]
+          - generic [ref=e70]:
+            - generic [ref=e72] [cursor=pointer]:
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - img "Виноградники Тосканы - фото 1"
+                - generic [ref=e75]:
+                  - img "Виноградники Тосканы - фото 2"
+                - generic [ref=e76]:
+                  - img "Виноградники Тосканы - фото 3"
+              - generic [ref=e77]: Виноградники Тосканы
+            - generic [ref=e80] [cursor=pointer]:
+              - generic [ref=e81]:
+                - generic [ref=e82]:
+                  - img "Своим ходом - фото 1"
+                - generic [ref=e83]:
+                  - img "Своим ходом - фото 2"
+                - generic [ref=e84]:
+                  - img "Своим ходом - фото 3"
+              - generic [ref=e85]: Своим ходом
+            - generic [ref=e88] [cursor=pointer]:
+              - generic [ref=e89]:
+                - generic [ref=e90]:
+                  - img "Ночной трофей - фото 1"
+                - generic [ref=e91]:
+                  - img "Ночной трофей - фото 2"
+                - generic [ref=e92]:
+                  - img "Ночной трофей - фото 3"
+              - generic [ref=e93]: Ночной трофей
+            - generic [ref=e96] [cursor=pointer]:
+              - generic [ref=e97]:
+                - generic [ref=e98]:
+                  - img "Среди книг - фото 1"
+                - generic [ref=e99]:
+                  - img "Среди книг - фото 2"
+                - generic [ref=e100]:
+                  - img "Среди книг - фото 3"
+              - generic [ref=e101]: Среди книг
+            - generic [ref=e104] [cursor=pointer]:
+              - generic [ref=e105]:
+                - generic [ref=e106]:
+                  - img "Открытие галереи - фото 1"
+                - generic [ref=e107]:
+                  - img "Открытие галереи - фото 2"
+                - generic [ref=e108]:
+                  - img "Открытие галереи - фото 3"
+              - generic [ref=e109]: Открытие галереи
+            - generic [ref=e112] [cursor=pointer]:
+              - generic [ref=e113]:
+                - generic [ref=e114]:
+                  - img "Ретро в городе - фото 1"
+                - generic [ref=e115]:
+                  - img "Ретро в городе - фото 2"
+                - generic [ref=e116]:
+                  - img "Ретро в городе - фото 3"
+              - generic [ref=e117]: Ретро в городе
+            - generic [ref=e120] [cursor=pointer]:
+              - generic [ref=e121]:
+                - generic [ref=e122]:
+                  - img "Среди трав - фото 1"
+                - generic [ref=e123]:
+                  - img "Среди трав - фото 2"
+                - generic [ref=e124]:
+                  - img "Среди трав - фото 3"
+              - generic [ref=e125]: Среди трав
+            - generic [ref=e128] [cursor=pointer]:
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - img "Английский сад - фото 1"
+                - generic [ref=e131]:
+                  - img "Английский сад - фото 2"
+                - generic [ref=e132]:
+                  - img "Английский сад - фото 3"
+              - generic [ref=e133]: Английский сад
+            - generic [ref=e136] [cursor=pointer]:
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - img "Альпийское шале - фото 1"
+                - generic [ref=e139]:
+                  - img "Альпийское шале - фото 2"
+                - generic [ref=e140]:
+                  - img "Альпийское шале - фото 3"
+              - generic [ref=e141]: Альпийское шале
+            - generic [ref=e144] [cursor=pointer]:
+              - generic [ref=e145]:
+                - generic [ref=e146]:
+                  - img "Ромашковое поле - фото 1"
+                - generic [ref=e147]:
+                  - img "Ромашковое поле - фото 2"
+                - generic [ref=e148]:
+                  - img "Ромашковое поле - фото 3"
+              - generic [ref=e149]: Ромашковое поле
+          - generic [ref=e151]:
+            - button [disabled]
+            - generic [ref=e152]: 1 / 14
+            - button [ref=e153] [cursor=pointer]
+      - generic [ref=e155]:
+        - heading "Остались вопросы?" [level=2] [ref=e157]
+        - generic [ref=e160]:
+          - heading [level=3] [ref=e162]:
+            - button "Что такое ИИ-фотосессия?" [ref=e163] [cursor=pointer]
+          - heading [level=3] [ref=e165]:
+            - button "Это действительно буду я на фотографиях?" [ref=e166] [cursor=pointer]
+          - heading [level=3] [ref=e168]:
+            - button "Какие фотографии лучше загружать?" [ref=e169] [cursor=pointer]
+          - heading [level=3] [ref=e171]:
+            - button "Сколько времени занимает генерация фотографий?" [ref=e172] [cursor=pointer]
+          - heading [level=3] [ref=e174]:
+            - button "Можно ли выбрать стиль фотографий?" [ref=e175] [cursor=pointer]
+          - heading [level=3] [ref=e177]:
+            - button "Что такое фотопрофиль?" [ref=e178] [cursor=pointer]
+          - heading [level=3] [ref=e180]:
+            - button "Что такое токены и зачем они нужны?" [ref=e181] [cursor=pointer]
+          - heading [level=3] [ref=e183]:
+            - button "Сколько стоит ИИ-фотосессия?" [ref=e184] [cursor=pointer]
+          - heading [level=3] [ref=e186]:
+            - button "Есть ли пробный период?" [ref=e187] [cursor=pointer]
+          - heading [level=3] [ref=e189]:
+            - button "Как работает подписка?" [ref=e190] [cursor=pointer]
+          - heading [level=3] [ref=e192]:
+            - button "Как отменить подписку?" [ref=e193] [cursor=pointer]
+          - heading [level=3] [ref=e195]:
+            - button "Где можно использовать полученные фотографии?" [ref=e196] [cursor=pointer]
+          - heading [level=3] [ref=e198]:
+            - button "Насколько это безопасно?" [ref=e199] [cursor=pointer]
+          - heading [level=3] [ref=e201]:
+            - button "Можно ли сделать фотосессию вдвоем?" [ref=e202] [cursor=pointer]
+          - heading [level=3] [ref=e204]:
+            - button "Чем ИИ-фотосессия лучше обычной фотосессии?" [ref=e205] [cursor=pointer]
+          - heading [level=3] [ref=e207]:
+            - button "Почему фотографии выглядят настолько реалистично?" [ref=e208] [cursor=pointer]
+          - heading [level=3] [ref=e210]:
+            - button "Сколько фотографий можно создать?" [ref=e211] [cursor=pointer]
+          - heading [level=3] [ref=e213]:
+            - button "Почему это дешевле настоящей фотосессии?" [ref=e214] [cursor=pointer]
+      - generic [ref=e220]:
+        - generic [ref=e221]: Создай свою фотосессию прямо сейчас!
+        - link "Выбрать фотосессию" [ref=e222] [cursor=pointer]:
+          - /url: "#catalog"
+    - contentinfo [ref=e228]:
+      - generic [ref=e229]:
+        - generic [ref=e233]:
+          - generic [ref=e234]:
+            - generic [ref=e235]: Nupix.AI - сервис для обработки фотографий при помощи искусственного интеллекта
+            - generic [ref=e237]:
+              - generic [ref=e238]: Поддержка работает с 10:00 до 22:00 по МСК
+              - generic [ref=e239]:
+                - link "support@nupix.ai" [ref=e240] [cursor=pointer]:
+                  - /url: mailto:support@nupix.ai
+                - link "Telegram Support" [ref=e242] [cursor=pointer]:
+                  - /url: https://t.me/nupix_support_bot
+              - link "Написать в поддержку" [ref=e244] [cursor=pointer]:
+                - /url: https://nupix.ai/tickets
+              - generic [ref=e246]: Тихомиров Кирилл Анатольевич
+              - generic [ref=e247]: ИНН 470703882016
+          - navigation [ref=e249]:
+            - link "Оферта" [ref=e250] [cursor=pointer]:
+              - /url: https://nupix.ai/docs/offer
+            - link "Правила сервиса" [ref=e251] [cursor=pointer]:
+              - /url: https://nupix.ai/docs/terms-of-service
+            - link "Правила подписки" [ref=e252] [cursor=pointer]:
+              - /url: https://nupix.ai/docs/terms-of-subscription
+            - link "Отмена подписки" [ref=e253] [cursor=pointer]:
+              - /url: https://nupix.ai/unsubscribe
+          - navigation [ref=e255]:
+            - link "Политика конфиденциальности" [ref=e256] [cursor=pointer]:
+              - /url: https://nupix.ai/docs/privacy-policy
+            - link "Согласие на обработку персональных данных" [ref=e257] [cursor=pointer]:
+              - /url: https://nupix.ai/docs/personal-data-processing-consent
+        - generic [ref=e258]: © 2026 Nupix.AI Все права защищены.
+  - generic [ref=e263]:
+    - generic [ref=e264]:
+      - text: Этот сайт собирает куки.
+      - link "Политика обработки" [ref=e265] [cursor=pointer]:
+        - /url: https://nupix.ai/docs/privacy-policy
+      - text: .
+    - button "Хорошо" [ref=e266] [cursor=pointer]

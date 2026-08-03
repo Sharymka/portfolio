@@ -1,0 +1,5 @@
+- generic [active] [ref=f5e1]:
+  - main [ref=f5e2]:
+    - button "Смотреть проекты" [ref=f5e3] [cursor=pointer]
+    - button "Написать мне" [ref=f5e4] [cursor=pointer]
+  - alert [ref=f5e5]
