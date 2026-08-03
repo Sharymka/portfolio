@@ -46,8 +46,8 @@ export function AboutValue() {
     <section className={styles.section}>
       <h6 className={styles.kicker}>Обо мне</h6>
       <h2 className={styles.heading}>
-        Пишу код<span className={styles.commaThin}>,</span> который приносит пользу пользователям
-        и результат продукту
+        Пишу код<span className={styles.commaThin}>,</span> который приносит пользу пользователям и
+        результат продукту
       </h2>
       <div className={styles.grid}>
         {CARDS.map((card) => (

@@ -1,6 +1,10 @@
 import styles from './skills.module.scss';
 
-const CATEGORIES: Array<{ label: string; tags: string[]; variant: 'accent' | 'accent2' | 'neutral' }> = [
+const CATEGORIES: Array<{
+  label: string;
+  tags: string[];
+  variant: 'accent' | 'accent2' | 'neutral';
+}> = [
   {
     label: 'Core',
     variant: 'accent',

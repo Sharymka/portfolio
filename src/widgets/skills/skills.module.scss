@@ -20,7 +20,12 @@
 }
 
 .gradientText {
-  background: linear-gradient(120deg, var(--color-accent-500), var(--color-accent-700), var(--color-accent-500));
+  background: linear-gradient(
+    120deg,
+    var(--color-accent-500),
+    var(--color-accent-700),
+    var(--color-accent-500)
+  );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
