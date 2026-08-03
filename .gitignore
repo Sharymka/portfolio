@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# screenshot tool output
+/temporary-screenshots
+
+# raw assets waiting to be sorted into public/
+/content/incoming
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
