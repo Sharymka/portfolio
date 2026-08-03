@@ -1,19 +1,15 @@
-import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { Unbounded, Nunito } from 'next/font/google';
 
-export const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
+export const unbounded = Unbounded({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '700', '800'],
+  variable: '--font-unbounded',
   display: 'swap',
 });
 
-export const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-export const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
+export const nunito = Nunito({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-nunito',
   display: 'swap',
 });
