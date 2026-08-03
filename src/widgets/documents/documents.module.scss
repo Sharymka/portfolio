@@ -1,0 +1,48 @@
+.section {
+  padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 64px);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kicker {
+  color: var(--color-accent-700);
+}
+
+.heading {
+  margin-bottom: var(--space-4);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.card {
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(140deg, var(--color-accent-400), var(--color-accent-700));
+  color: var(--color-bg);
+}
+
+.label {
+  font-size: 14px;
+}
