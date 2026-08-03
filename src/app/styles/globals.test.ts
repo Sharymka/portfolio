@@ -18,9 +18,16 @@ describe('globals.scss — shared keyframes', () => {
     expect(source).toMatch(/animation-duration:\s*0\.01ms\s*!important/);
   });
 
-  it('sets base body background/color/font from tokens', () => {
-    expect(source).toMatch(/background:\s*var\(--color-bg\)/);
+  it('sets base body color/font from tokens', () => {
     expect(source).toMatch(/color:\s*var\(--color-text\)/);
     expect(source).toMatch(/font-family:\s*var\(--font-body\)/);
+  });
+
+  it('applies the animated gradient background to body', () => {
+    expect(source).toMatch(
+      /background:\s*linear-gradient\(\s*90deg,\s*var\(--color-neutral-100\),\s*var\(--color-accent-100\),\s*var\(--color-neutral-100\),\s*var\(--color-neutral-100\),\s*var\(--color-accent-2-200\)\s*\)/,
+    );
+    expect(source).toMatch(/background-size:\s*140% 140%/);
+    expect(source).toMatch(/animation:\s*bgBreathe 16s ease-in-out infinite/);
   });
 });

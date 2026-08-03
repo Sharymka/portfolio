@@ -11,7 +11,16 @@ body {
 }
 
 body {
-  background: var(--color-bg);
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-100),
+    var(--color-accent-100),
+    var(--color-neutral-100),
+    var(--color-neutral-100),
+    var(--color-accent-2-200)
+  );
+  background-size: 140% 140%;
+  animation: bgBreathe 16s ease-in-out infinite;
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
