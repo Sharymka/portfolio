@@ -27,7 +27,7 @@
 }
 
 .primary {
-  background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+  background: var(--color-accent);
   color: var(--color-bg);
 
   &:hover {
@@ -37,7 +37,7 @@
 
 .secondary {
   background: transparent;
-  border-color: var(--color-border);
+  border-color: var(--color-divider);
   color: var(--color-text);
 
   &:hover {
