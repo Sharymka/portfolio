@@ -12,6 +12,8 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     globals: true,
     css: true,
+    // Claude Code tooling directory (skills, settings, worktrees) — not application code.
+    exclude: ['**/node_modules/**', '.claude/**'],
   },
   resolve: {
     alias: {

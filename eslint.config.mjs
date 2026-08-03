@@ -21,6 +21,8 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
     'storybook-static/**',
+    // Claude Code tooling directory (skills, settings, worktrees) — not application code.
+    '.claude/**',
   ]),
 ]);
 
