@@ -48,7 +48,7 @@
 }
 
 .content {
-  flex: 1 1 380px;
+  flex: 0 1 580px;
   min-width: 280px;
   position: relative;
   z-index: 1;
@@ -125,4 +125,41 @@
     0 2px 4px color-mix(in srgb, var(--color-neutral-900) 12%, transparent),
     0 10px 20px color-mix(in srgb, var(--color-neutral-900) 16%, transparent),
     0 28px 48px color-mix(in srgb, var(--color-neutral-900) 22%, transparent);
+}
+
+// Duplicated from globals.scss on purpose: Lightning CSS (Turbopack's CSS
+// Modules processor) scopes an animation-name reference to this module even
+// when the @keyframes lives elsewhere, so referencing the global keyframes
+// by bare name here silently does nothing — the definition has to live in
+// the same file as the rule that uses it.
+@keyframes floatBlob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-10px, 14px) scale(1.04);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 8px 34px color-mix(in srgb, var(--color-accent) 65%, transparent);
+  }
 }
