@@ -100,3 +100,18 @@
   font-size: 10px;
   opacity: 0.6;
 }
+
+// Duplicated from globals.scss on purpose — see hero.module.scss for why
+// (Lightning CSS scopes this module's animation-name reference, so the
+// @keyframes has to live in this same file to actually match).
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
