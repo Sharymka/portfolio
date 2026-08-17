@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import './styles/globals.scss';
 import { unbounded, nunito } from './fonts';
+import { LanguageProvider } from '@/shared/lib/language';
 
 export const metadata: Metadata = {
   title: 'Светлана Хайрудинова — Frontend-разработчик',
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ru" className={`${unbounded.variable} ${nunito.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
