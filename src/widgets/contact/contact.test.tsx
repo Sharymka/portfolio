@@ -12,6 +12,18 @@ describe('Contact', () => {
     expect(screen.getByLabelText('Сообщение')).toBeInTheDocument();
   });
 
+  it('shows direct email and Telegram links', () => {
+    render(<Contact />);
+    expect(screen.getByRole('link', { name: /Email/ })).toHaveAttribute(
+      'href',
+      'mailto:sveta.sharymova@gmail.com',
+    );
+    expect(screen.getByRole('link', { name: /Telegram/ })).toHaveAttribute(
+      'href',
+      'https://t.me/svetka_khai',
+    );
+  });
+
   it('shows a thank-you message instead of the form after submit', async () => {
     const user = userEvent.setup();
     render(<Contact />);
