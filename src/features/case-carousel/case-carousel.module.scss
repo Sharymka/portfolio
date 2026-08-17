@@ -1,0 +1,66 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-neutral-900) 70%, transparent);
+}
+
+.dialog {
+  position: relative;
+  width: min(900px, 100%);
+  outline: none;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  height: min(70vh, 600px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.image {
+  object-fit: contain;
+}
+
+.close,
+.prev,
+.next {
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.close {
+  top: -16px;
+  right: -16px;
+}
+
+.prev {
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+}
+
+.next {
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+}
+
+.counter {
+  text-align: center;
+  margin-top: var(--space-2);
+  font-size: 13px;
+  color: var(--color-bg);
+}
