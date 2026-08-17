@@ -14,4 +14,9 @@ describe('Think', () => {
     expect(screen.getByText('Простота — по умолчанию')).toBeInTheDocument();
     expect(screen.getByText('Думаю о развитии проекта')).toBeInTheDocument();
   });
+
+  it('renders an icon for every item', () => {
+    const { container } = render(<Think />);
+    expect(container.querySelectorAll('svg').length).toBe(3);
+  });
 });
