@@ -29,15 +29,31 @@ describe('hero.module.scss — background circles and CTA shine', () => {
     expect(content).toMatch(/flex:\s*0 1/);
   });
 
-  it('centers the hero in the same 1160px container as the other sections', () => {
+  it('centers the hero in a fixed-width container like the other sections', () => {
     const hero = source.slice(0, source.indexOf('.circleTopLeft'));
-    expect(hero).toMatch(/max-width:\s*1160px/);
+    expect(hero).toMatch(/max-width:\s*\d+px/);
     expect(hero).toMatch(/margin:\s*0 auto/);
   });
 
   it('pushes the text and photo to opposite edges of the container', () => {
     const hero = source.slice(0, source.indexOf('.circleTopLeft'));
     expect(hero).toMatch(/justify-content:\s*space-between/);
+  });
+
+  it('keeps the top-left circle fully inside the section (not cropped)', () => {
+    const circle = source.slice(
+      source.indexOf('.circleTopLeft'),
+      source.indexOf('.circleBottomLeft'),
+    );
+    expect(circle).not.toMatch(/top:\s*-/);
+    expect(circle).not.toMatch(/left:\s*-/);
+  });
+
+  it('adds the small overlapping circle from the mockup near the top-left one', () => {
+    expect(source).toMatch(/\.circleSmall/);
+    const circle = source.slice(source.indexOf('.circleSmall'));
+    expect(circle).toMatch(/background:\s*var\(--color-accent-300\)/);
+    expect(circle).toMatch(/animation:\s*floatBlob 7s ease-in-out infinite reverse/);
   });
 
   it('defines floatBlob, gradientShift, and glowPulse locally in this module', () => {

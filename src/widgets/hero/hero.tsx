@@ -1,11 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/shared/ui/button';
+import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
 import styles from './hero.module.scss';
 
 export function Hero() {
+  const { ref, visible } = useReveal<HTMLElement>();
+
   return (
-    <section className={styles.hero} data-reveal="hero">
+    <section ref={ref} className={styles.hero} style={revealStyle(visible)}>
       <div className={styles.circleTopLeft} />
+      <div className={styles.circleSmall} />
       <div className={styles.circleBottomLeft} />
       <div className={styles.circleFloating} />
 

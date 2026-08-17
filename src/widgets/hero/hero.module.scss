@@ -13,13 +13,27 @@
 
 .circleTopLeft {
   position: absolute;
-  top: -80px;
-  left: -60px;
+  top: 20px;
+  left: 20px;
   width: 220px;
   height: 220px;
   border-radius: 50%;
   background: var(--color-accent-300);
   opacity: 0.3;
+  z-index: 0;
+}
+
+.circleSmall {
+  position: absolute;
+  top: 160px;
+  left: 150px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--color-accent-300);
+  opacity: 0.35;
+  filter: blur(1px);
+  animation: floatBlob 7s ease-in-out infinite reverse;
   z-index: 0;
 }
 
