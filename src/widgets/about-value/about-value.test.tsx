@@ -15,9 +15,9 @@ const CARD_TITLES = [
 describe('AboutValue', () => {
   it('renders the section heading', () => {
     render(<AboutValue />);
-    expect(
-      screen.getByRole('heading', { level: 2, name: /Пишу код.*приносит пользу пользователям/ }),
-    ).toBeInTheDocument();
+    const heading = screen.getByRole('heading', { level: 2 });
+    expect(heading.textContent).toMatch(/Пишу код/);
+    expect(heading.textContent).toMatch(/приносит/);
   });
 
   it('renders all seven card titles', () => {
@@ -25,5 +25,16 @@ describe('AboutValue', () => {
     for (const title of CARD_TITLES) {
       expect(screen.getByText(new RegExp(title))).toBeInTheDocument();
     }
+  });
+
+  it('renders an icon inside every card', () => {
+    const { container } = render(<AboutValue />);
+    expect(container.querySelectorAll('svg').length).toBe(7);
+  });
+
+  it('highlights "пользу пользователям" and "результат продукту" in the heading', () => {
+    render(<AboutValue />);
+    expect(screen.getByText('пользу пользователям')).toBeInTheDocument();
+    expect(screen.getByText('результат продукту')).toBeInTheDocument();
   });
 });

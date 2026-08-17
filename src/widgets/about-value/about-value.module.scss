@@ -19,6 +19,34 @@
   font-weight: 400;
 }
 
+.gradientAccent {
+  background: linear-gradient(
+    120deg,
+    var(--color-accent-500),
+    var(--color-accent-700),
+    var(--color-accent-500)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+.gradientAccent2 {
+  background: linear-gradient(
+    120deg,
+    var(--color-accent-2-500),
+    var(--color-accent-2-700),
+    var(--color-accent-2-500)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -39,8 +67,10 @@
 .icon {
   width: 56px;
   height: 56px;
-  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-  background: linear-gradient(140deg, var(--color-accent-2-400), var(--color-accent-2-700));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bg);
   box-shadow: var(--shadow-md);
 }
 
@@ -55,4 +85,19 @@
   font-size: 13px;
   opacity: 0.8;
   flex: 1;
+}
+
+// Duplicated from globals.scss on purpose — see hero.module.scss for why
+// (Lightning CSS scopes this module's animation-name reference, so the
+// @keyframes has to live in this same file to actually match).
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
