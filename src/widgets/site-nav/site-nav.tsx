@@ -1,29 +1,49 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@/shared/ui/button';
+import { useLanguage } from '@/shared/lib/language';
 import styles from './site-nav.module.scss';
 
-const LINKS: Array<{ label: string; href: string }> = [
-  { label: 'Навыки', href: '#skills' },
-  { label: 'Кейсы', href: '#cases' },
-  { label: 'Подход', href: '#think' },
-  { label: 'Спросить ИИ', href: '#ai' },
-  { label: 'Документы', href: '#documents' },
-];
+const COPY = {
+  ru: {
+    brand: 'Светлана Хайрудинова',
+    langLabel: 'Язык',
+    cta: 'Связаться',
+    links: [
+      { label: 'Навыки', href: '#skills' },
+      { label: 'Кейсы', href: '#cases' },
+      { label: 'Подход', href: '#think' },
+      { label: 'Спросить ИИ', href: '#ai' },
+      { label: 'Документы', href: '#documents' },
+    ],
+  },
+  en: {
+    brand: 'Svetlana Khairudinova',
+    langLabel: 'Language',
+    cta: 'Contact',
+    links: [
+      { label: 'Skills', href: '#skills' },
+      { label: 'Cases', href: '#cases' },
+      { label: 'Approach', href: '#think' },
+      { label: 'Ask My AI', href: '#ai' },
+      { label: 'Documents', href: '#documents' },
+    ],
+  },
+};
 
 export function SiteNav() {
-  const [lang, setLang] = useState<'ru' | 'en'>('ru');
+  const { lang, setLang } = useLanguage();
+  const copy = COPY[lang];
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.brand}>Светлана Хайрудинова</div>
-      {LINKS.map((link) => (
+      <div className={styles.brand}>{copy.brand}</div>
+      {copy.links.map((link) => (
         <a key={link.href} href={link.href} className={styles.link}>
           {link.label}
         </a>
       ))}
-      <div className={styles.langToggle} role="group" aria-label="Язык">
+      <div className={styles.langToggle} role="group" aria-label={copy.langLabel}>
         <button
           type="button"
           className={styles.langPill}
@@ -44,7 +64,7 @@ export function SiteNav() {
         </button>
       </div>
       <Button as="a" href="#contact" variant="primary" className={styles.cta}>
-        Связаться
+        {copy.cta}
       </Button>
     </nav>
   );
