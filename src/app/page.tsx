@@ -2,6 +2,7 @@ import { SiteNav } from '@/widgets/site-nav';
 import { Hero } from '@/widgets/hero';
 import { AboutValue } from '@/widgets/about-value';
 import { Skills } from '@/widgets/skills';
+import { Cases } from '@/widgets/cases';
 import { Think } from '@/widgets/think';
 import { Documents } from '@/widgets/documents';
 import { Contact } from '@/widgets/contact';
@@ -15,7 +16,7 @@ export default function Home() {
         <Hero />
         <AboutValue />
         <Skills />
-        {/* Cases section lands here in a follow-up plan (screenshot carousel) */}
+        <Cases />
         <Think />
         {/* Ask My AI section lands here in a follow-up plan (chat) */}
         <Documents />

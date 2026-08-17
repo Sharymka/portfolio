@@ -56,7 +56,11 @@ export function CaseCarousel({ images, title, initialIndex, onClose }: CaseCarou
   }, [images.length, onClose]);
 
   return (
+    // Click-to-close backdrop convenience; Escape and the close button already
+    // cover full keyboard access, so this decorative layer doesn't need its own.
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div className={styles.backdrop} onClick={onClose}>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
       <div
         ref={dialogRef}
         role="dialog"
