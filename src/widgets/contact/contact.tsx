@@ -2,10 +2,12 @@
 
 import { useState, type FormEvent } from 'react';
 import { Button } from '@/shared/ui/button';
+import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
 import styles from './contact.module.scss';
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+  const { ref, visible } = useReveal<HTMLElement>();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -13,7 +15,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className={styles.section}>
+    <section id="contact" ref={ref} className={styles.section} style={revealStyle(visible)}>
       <h6 className={styles.kicker}>Контакты</h6>
       <h2 className={styles.heading}>
         Обсудим задачу<span className={styles.commaThin}>?</span>

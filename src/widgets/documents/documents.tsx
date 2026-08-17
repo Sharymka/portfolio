@@ -1,3 +1,6 @@
+'use client';
+
+import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
 import styles from './documents.module.scss';
 
 const FILES = [
@@ -7,8 +10,10 @@ const FILES = [
 ];
 
 export function Documents() {
+  const { ref, visible } = useReveal<HTMLElement>();
+
   return (
-    <section id="documents" className={styles.section}>
+    <section id="documents" ref={ref} className={styles.section} style={revealStyle(visible)}>
       <h6 className={styles.kicker}>Документы</h6>
       <h2 className={styles.heading}>Резюме и подтверждающие документы</h2>
       <div className={styles.list}>

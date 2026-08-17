@@ -1,3 +1,6 @@
+'use client';
+
+import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
 import styles from './skills.module.scss';
 
 const CATEGORIES: Array<{
@@ -36,8 +39,10 @@ const CATEGORIES: Array<{
 ];
 
 export function Skills() {
+  const { ref, visible } = useReveal<HTMLElement>();
+
   return (
-    <section id="skills" className={styles.section}>
+    <section id="skills" ref={ref} className={styles.section} style={revealStyle(visible)}>
       <h6 className={styles.kicker}>Навыки</h6>
       <h2 className={styles.heading}>
         <span className={styles.gradientText}>Инструменты</span>
