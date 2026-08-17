@@ -1,0 +1,94 @@
+.card {
+  border-radius: calc(var(--radius-lg) * 1.15);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.rowAi {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rowUser {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bubbleAi,
+.bubbleUser {
+  max-width: 80%;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+}
+
+.bubbleAi {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.bubbleUser {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0 var(--space-4) var(--space-3);
+}
+
+.promptButton {
+  font-size: 13px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-divider);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-divider);
+}
+
+.input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-divider);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.submit {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-accent-400), var(--color-accent-700));
+  color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
