@@ -27,7 +27,8 @@ const COPY = {
       'Привет! Спросите меня что-то обо мне и моей работе, или выберите готовый вопрос ниже.',
     placeholder: 'Спросите что-нибудь...',
     submitLabel: 'Отправить',
-    errorFallback: 'ИИ-ассистент временно недоступен, попробуйте позже, или напишите мне напрямую.',
+    errorFallback:
+      'Не получилось отправить сообщение — возможно, вопросов было слишком много, или ассистент временно недоступен. Попробуйте через несколько минут или напишите мне напрямую.',
   },
   en: {
     startingMessage:
@@ -35,7 +36,7 @@ const COPY = {
     placeholder: 'Ask something...',
     submitLabel: 'Send',
     errorFallback:
-      'The AI assistant is temporarily unavailable, please try again later, or message me directly.',
+      "Couldn't send your message — you may be asking too fast, or the assistant is temporarily unavailable. Try again in a few minutes, or message me directly.",
   },
 };
 
