@@ -2,10 +2,28 @@
 
 import { AskAiChat } from '@/features/ask-ai-chat';
 import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
+import { useLanguage } from '@/shared/lib/language';
 import styles from './ask-ai.module.scss';
+
+const COPY = {
+  ru: {
+    headingStart: 'Есть вопрос обо мне',
+    headingEnd: 'Спросите напрямую',
+    subtitle:
+      'Небольшой помощник, обученный на моём опыте и кейсах — задайте вопрос или выберите один из готовых.',
+  },
+  en: {
+    headingStart: 'Have a question about me',
+    headingEnd: 'Ask directly',
+    subtitle:
+      'A small assistant trained on my experience and cases — ask a question or pick one of the ready-made ones.',
+  },
+};
 
 export function AskAi() {
   const { ref, visible } = useReveal<HTMLElement>();
+  const { lang } = useLanguage();
+  const copy = COPY[lang];
 
   return (
     <section id="ai" ref={ref} className={styles.section} style={revealStyle(visible)}>
@@ -29,12 +47,10 @@ export function AskAi() {
             Ask My <span className={styles.thin}>AI</span>
           </h6>
           <h2 className={styles.heading}>
-            Есть вопрос обо мне<span className={styles.commaThin}>?</span> Спросите напрямую
+            {copy.headingStart}
+            <span className={styles.commaThin}>?</span> {copy.headingEnd}
           </h2>
-          <p className={styles.subtitle}>
-            Небольшой помощник, обученный на моём опыте и кейсах — задайте вопрос или выберите один
-            из готовых.
-          </p>
+          <p className={styles.subtitle}>{copy.subtitle}</p>
         </div>
       </div>
       <AskAiChat />

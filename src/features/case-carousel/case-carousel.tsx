@@ -2,7 +2,23 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useLanguage } from '@/shared/lib/language';
 import styles from './case-carousel.module.scss';
+
+const COPY = {
+  ru: {
+    close: 'Закрыть',
+    prev: 'Предыдущий скриншот',
+    next: 'Следующий скриншот',
+    alt: (title: string, n: number) => `${title} — скриншот ${n}`,
+  },
+  en: {
+    close: 'Close',
+    prev: 'Previous screenshot',
+    next: 'Next screenshot',
+    alt: (title: string, n: number) => `${title} — screenshot ${n}`,
+  },
+};
 
 interface CaseCarouselProps {
   images: string[];
@@ -14,6 +30,8 @@ interface CaseCarouselProps {
 export function CaseCarousel({ images, title, initialIndex, onClose }: CaseCarouselProps) {
   const [index, setIndex] = useState(initialIndex);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const { lang } = useLanguage();
+  const copy = COPY[lang];
 
   const next = () => setIndex((i) => (i + 1) % images.length);
   const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
@@ -70,31 +88,21 @@ export function CaseCarousel({ images, title, initialIndex, onClose }: CaseCarou
         className={styles.dialog}
         onClick={(e) => e.stopPropagation()}
       >
-        <button type="button" className={styles.close} aria-label="Закрыть" onClick={onClose}>
+        <button type="button" className={styles.close} aria-label={copy.close} onClick={onClose}>
           ✕
         </button>
         <div className={styles.imageFrame}>
           <Image
             src={images[index]}
-            alt={`${title} — скриншот ${index + 1}`}
+            alt={copy.alt(title, index + 1)}
             fill
             className={styles.image}
           />
         </div>
-        <button
-          type="button"
-          className={styles.prev}
-          aria-label="Предыдущий скриншот"
-          onClick={prev}
-        >
+        <button type="button" className={styles.prev} aria-label={copy.prev} onClick={prev}>
           ←
         </button>
-        <button
-          type="button"
-          className={styles.next}
-          aria-label="Следующий скриншот"
-          onClick={next}
-        >
+        <button type="button" className={styles.next} aria-label={copy.next} onClick={next}>
           →
         </button>
         <div className={styles.counter}>

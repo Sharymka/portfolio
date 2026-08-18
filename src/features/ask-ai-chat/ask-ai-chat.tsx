@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { useLanguage } from '@/shared/lib/language';
 import { answerFor, QA_DATA } from './model/qa-data';
 import styles from './ask-ai-chat.module.scss';
 
@@ -9,14 +10,27 @@ interface Message {
   text: string;
 }
 
-const STARTING_MESSAGE: Message = {
-  role: 'ai',
-  text: 'Привет! Спросите меня что-то обо мне и моей работе, или выберите готовый вопрос ниже.',
+const COPY = {
+  ru: {
+    startingMessage:
+      'Привет! Спросите меня что-то обо мне и моей работе, или выберите готовый вопрос ниже.',
+    placeholder: 'Спросите что-нибудь...',
+    submitLabel: 'Отправить',
+  },
+  en: {
+    startingMessage:
+      'Hi! Ask me something about me and my work, or pick one of the ready-made questions below.',
+    placeholder: 'Ask something...',
+    submitLabel: 'Send',
+  },
 };
 
 export function AskAiChat() {
-  const [messages, setMessages] = useState<Message[]>([STARTING_MESSAGE]);
+  const { lang } = useLanguage();
+  const copy = COPY[lang];
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
+  const allMessages = [{ role: 'ai' as const, text: copy.startingMessage }, ...messages];
 
   function respondTo(question: string, answer: string) {
     setMessages((prev) => [...prev, { role: 'user', text: question }]);
@@ -29,21 +43,21 @@ export function AskAiChat() {
     event.preventDefault();
     const text = input.trim();
     if (!text) return;
-    respondTo(text, answerFor(text));
+    respondTo(text, answerFor(text, lang));
     setInput('');
   }
 
   return (
     <div className={styles.card}>
       <div className={styles.messages}>
-        {messages.map((m, i) => (
+        {allMessages.map((m, i) => (
           <div key={i} className={m.role === 'user' ? styles.rowUser : styles.rowAi}>
             <div className={m.role === 'user' ? styles.bubbleUser : styles.bubbleAi}>{m.text}</div>
           </div>
         ))}
       </div>
       <div className={styles.prompts}>
-        {QA_DATA.map((qa) => (
+        {QA_DATA[lang].map((qa) => (
           <button
             key={qa.question}
             type="button"
@@ -58,11 +72,11 @@ export function AskAiChat() {
         <input
           className={styles.input}
           type="text"
-          placeholder="Спросите что-нибудь..."
+          placeholder={copy.placeholder}
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button type="submit" className={styles.submit} aria-label="Отправить">
+        <button type="submit" className={styles.submit} aria-label={copy.submitLabel}>
           <svg
             width="16"
             height="16"

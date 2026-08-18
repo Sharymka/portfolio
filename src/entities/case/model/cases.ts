@@ -59,3 +59,45 @@ export const CASES: Case[] = [
     images: imagesFor('questionnaire', 7),
   },
 ];
+
+export const CASES_EN: Case[] = [
+  {
+    slug: 'auction',
+    index: '01',
+    role: 'Fullstack Developer',
+    period: 'July 2023 — present',
+    title: 'Alpha Ecosystem — a marketplace for listings and auctions',
+    goal: 'catalog, filtering, reviews, personal account, real-time chat — in a cross-functional Agile team',
+    result: 'Eliminated repeat network requests when navigating between tabs — from 3-4 down to 0',
+    details:
+      'Designed the data layer so that switching between catalog tabs no longer triggers redundant network calls.',
+    tags: ['Next.js', 'React', 'TypeScript', 'Redux Toolkit', 'RTK Query'],
+    images: imagesFor('auction', 12),
+  },
+  {
+    slug: 'hotel',
+    index: '02',
+    role: 'Web Developer',
+    period: 'September 2021 — May 2023',
+    title: 'myHotel — a hotel management system',
+    goal: 'a web app for running a hotel business: bookings, rooms, users, and orders',
+    result: 'Reusable UI components and a stable REST layer between React and Laravel',
+    details:
+      'Built the frontend in React, implemented booking and order management flows, integrated it with a Laravel backend via REST API, handled loading and error states, worked with PostgreSQL and Docker at the local development level, took part in technical discussions with the backend team, and refactored components.',
+    tags: ['React', 'REST API', 'Laravel', 'PostgreSQL', 'Docker'],
+    images: imagesFor('hotel', 3),
+  },
+  {
+    slug: 'questionnaire',
+    index: '03',
+    role: 'Fullstack Developer Intern',
+    period: 'September — December 2023',
+    title: 'Questionnaire App — Itransition',
+    goal: 'a survey builder with user roles',
+    result: 'Full cycle in 4 months: UI → API → access roles',
+    details:
+      'Built a drag-and-drop form builder on the frontend and a REST API on Express.js on the backend — from the UI down to access roles and image uploads.',
+    tags: ['React', 'Express.js', 'MySQL', 'Cloudinary'],
+    images: imagesFor('questionnaire', 7),
+  },
+];

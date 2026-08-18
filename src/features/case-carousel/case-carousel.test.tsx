@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { LanguageProvider, useLanguage } from '@/shared/lib/language';
 import { CaseCarousel } from './case-carousel';
 
 const IMAGES = [
@@ -54,5 +55,30 @@ describe('CaseCarousel', () => {
   it('moves focus into the dialog on open', () => {
     render(<CaseCarousel images={IMAGES} title="Альфа" initialIndex={0} onClose={vi.fn()} />);
     expect(screen.getByRole('dialog')).toHaveFocus();
+  });
+
+  it('translates control labels after switching to EN', async () => {
+    const user = userEvent.setup();
+    function CarouselWithToggle() {
+      const { toggle } = useLanguage();
+      return (
+        <>
+          <button type="button" onClick={toggle}>
+            toggle
+          </button>
+          <CaseCarousel images={IMAGES} title="Альфа" initialIndex={0} onClose={vi.fn()} />
+        </>
+      );
+    }
+    render(
+      <LanguageProvider>
+        <CarouselWithToggle />
+      </LanguageProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'toggle' }));
+
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Previous screenshot' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Next screenshot' })).toBeInTheDocument();
   });
 });

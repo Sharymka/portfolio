@@ -2,18 +2,22 @@
 
 import type { ReactNode } from 'react';
 import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
+import { useLanguage } from '@/shared/lib/language';
 import styles from './think.module.scss';
 
-const ITEMS: Array<{
-  title: string;
-  body: string;
+interface ItemMeta {
   gradient: string;
   radius: string;
   icon: ReactNode;
-}> = [
+}
+
+interface ItemCopy {
+  title: string;
+  body: string;
+}
+
+const ITEM_META: ItemMeta[] = [
   {
-    title: 'Сначала понимаю ограничения',
-    body: 'Прежде чем выбирать решение, определяю требования, ограничения и то, что нельзя менять.',
     gradient: 'linear-gradient(140deg, var(--color-accent-400), var(--color-accent-700))',
     radius: '50%',
     icon: (
@@ -24,8 +28,6 @@ const ITEMS: Array<{
     ),
   },
   {
-    title: 'Простота — по умолчанию',
-    body: 'Выбираю самое простое решение и усложняю его только тогда, когда это действительно необходимо.',
     gradient: 'linear-gradient(140deg, var(--color-accent-2-400), var(--color-accent-2-700))',
     radius: '38% 62% 63% 37% / 41% 44% 56% 59%',
     icon: (
@@ -39,8 +41,6 @@ const ITEMS: Array<{
     ),
   },
   {
-    title: 'Думаю о развитии проекта',
-    body: 'Предпочитаю решения, которые легко поддерживать, расширять и при необходимости изменить.',
     gradient: 'linear-gradient(140deg, var(--color-accent-2-300), var(--color-accent-500))',
     radius: '50%',
     icon: (
@@ -52,48 +52,93 @@ const ITEMS: Array<{
   },
 ];
 
+const COPY = {
+  ru: {
+    kicker: 'Как я думаю',
+    headingStart: 'Инженерный подход',
+    headingEnd: 'а не просто реализация',
+    lead: 'Каждое техническое решение принимаю с учетом требований продукта, ограничений проекта и долгосрочной поддержки кода.',
+    items: [
+      {
+        title: 'Сначала понимаю ограничения',
+        body: 'Прежде чем выбирать решение, определяю требования, ограничения и то, что нельзя менять.',
+      },
+      {
+        title: 'Простота — по умолчанию',
+        body: 'Выбираю самое простое решение и усложняю его только тогда, когда это действительно необходимо.',
+      },
+      {
+        title: 'Думаю о развитии проекта',
+        body: 'Предпочитаю решения, которые легко поддерживать, расширять и при необходимости изменить.',
+      },
+    ] satisfies ItemCopy[],
+  },
+  en: {
+    kicker: 'How I think',
+    headingStart: 'An engineering approach',
+    headingEnd: 'not just implementation',
+    lead: 'I make every technical decision with product requirements, project constraints, and long-term maintainability in mind.',
+    items: [
+      {
+        title: 'I understand the constraints first',
+        body: "Before picking a solution, I define the requirements, constraints, and what can't be changed.",
+      },
+      {
+        title: 'Simplicity by default',
+        body: "I choose the simplest solution and only add complexity when it's truly necessary.",
+      },
+      {
+        title: "I think about the project's growth",
+        body: 'I prefer solutions that are easy to maintain, extend, and change when needed.',
+      },
+    ] satisfies ItemCopy[],
+  },
+};
+
 export function Think() {
   const { ref, visible } = useReveal<HTMLElement>();
+  const { lang } = useLanguage();
+  const copy = COPY[lang];
 
   return (
     <section id="think" ref={ref} className={styles.section} style={revealStyle(visible)}>
       <div className={styles.intro}>
-        <h6 className={styles.kicker}>Как я думаю</h6>
+        <h6 className={styles.kicker}>{copy.kicker}</h6>
         <h2 className={styles.heading}>
-          <span className={styles.gradientText}>Инженерный подход</span>
-          <span className={styles.commaThin}>,</span> а не просто реализация
+          <span className={styles.gradientText}>{copy.headingStart}</span>
+          <span className={styles.commaThin}>,</span> {copy.headingEnd}
         </h2>
-        <p className={styles.lead}>
-          Каждое техническое решение принимаю с учетом требований продукта, ограничений проекта и
-          долгосрочной поддержки кода.
-        </p>
+        <p className={styles.lead}>{copy.lead}</p>
       </div>
       <div className={styles.items}>
-        {ITEMS.map((item) => (
-          <div key={item.title} className={styles.item}>
-            <div
-              className={styles.itemIcon}
-              style={{ background: item.gradient, borderRadius: item.radius }}
-            >
-              <svg
-                width="19"
-                height="19"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+        {ITEM_META.map((meta, i) => {
+          const item = copy.items[i];
+          return (
+            <div key={item.title} className={styles.item}>
+              <div
+                className={styles.itemIcon}
+                style={{ background: meta.gradient, borderRadius: meta.radius }}
               >
-                {item.icon}
-              </svg>
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {meta.icon}
+                </svg>
+              </div>
+              <div>
+                <div className={styles.itemTitle}>{item.title}</div>
+                <div className={styles.itemBody}>{item.body}</div>
+              </div>
             </div>
-            <div>
-              <div className={styles.itemTitle}>{item.title}</div>
-              <div className={styles.itemBody}>{item.body}</div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

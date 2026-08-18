@@ -1,7 +1,20 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { LanguageProvider, useLanguage } from '@/shared/lib/language';
 import { AskAiChat } from './ask-ai-chat';
+
+function AskAiChatWithToggle() {
+  const { toggle } = useLanguage();
+  return (
+    <>
+      <button type="button" onClick={toggle}>
+        toggle
+      </button>
+      <AskAiChat />
+    </>
+  );
+}
 
 describe('AskAiChat', () => {
   it('shows the starting AI message', () => {
@@ -46,5 +59,23 @@ describe('AskAiChat', () => {
     render(<AskAiChat />);
     await user.click(screen.getByRole('button', { name: 'Отправить' }));
     expect(screen.getAllByText(/Привет!/)).toHaveLength(1);
+  });
+
+  it('translates the starting message, prompts, and answers after switching to EN', async () => {
+    const user = userEvent.setup();
+    render(
+      <LanguageProvider>
+        <AskAiChatWithToggle />
+      </LanguageProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'toggle' }));
+
+    expect(screen.getByText(/Hi! Ask me something/)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: "What's your preferred stack?" }));
+    expect(await screen.findByText(/My main stack is/)).toBeInTheDocument();
+
+    await user.type(screen.getByPlaceholderText('Ask something...'), 'what do you know?');
+    await user.click(screen.getByRole('button', { name: 'Send' }));
+    expect(await screen.findByText(/Good question/)).toBeInTheDocument();
   });
 });

@@ -1,7 +1,20 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { LanguageProvider, useLanguage } from '@/shared/lib/language';
 import { Cases } from './cases';
+
+function CasesWithToggle() {
+  const { toggle } = useLanguage();
+  return (
+    <>
+      <button type="button" onClick={toggle}>
+        toggle
+      </button>
+      <Cases />
+    </>
+  );
+}
 
 describe('Cases', () => {
   it('has the #cases anchor id and renders all three titles', () => {
@@ -24,5 +37,24 @@ describe('Cases', () => {
 
     await user.click(screen.getByRole('button', { name: 'Закрыть' }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('translates the heading and case copy after switching to EN', async () => {
+    const user = userEvent.setup();
+    render(
+      <LanguageProvider>
+        <CasesWithToggle />
+      </LanguageProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'toggle' }));
+
+    const heading = screen.getByRole('heading', { level: 2 });
+    expect(heading.textContent).toMatch(/Results first/);
+    expect(
+      screen.getByText('Alpha Ecosystem — a marketplace for listings and auctions'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('myHotel — a hotel management system')).toBeInTheDocument();
+    expect(screen.getAllByText('Goal:').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Result:').length).toBeGreaterThan(0);
   });
 });
