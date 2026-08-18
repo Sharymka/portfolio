@@ -2,13 +2,8 @@
 
 import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
 import { useLanguage } from '@/shared/lib/language';
+import { SKILL_CATEGORIES } from '@/entities/skill';
 import styles from './skills.module.scss';
-
-interface Category {
-  label: string;
-  tags: string[];
-  variant: 'accent' | 'accent2' | 'neutral';
-}
 
 const COPY = {
   ru: {
@@ -16,90 +11,12 @@ const COPY = {
     headingStart: 'Инструменты',
     headingEnd: 'которыми решаю задачи каждый день',
     alsoLabel: 'Также работала с:',
-    categories: [
-      {
-        label: 'Core',
-        variant: 'accent',
-        tags: ['React', 'TypeScript', 'Next.js', 'JavaScript (ES6+)', 'HTML5'],
-      },
-      {
-        label: 'State & Data',
-        variant: 'accent2',
-        tags: [
-          'Redux Toolkit',
-          'RTK Query',
-          'REST API',
-          'SSR / Hydration',
-          'client-side caching',
-          'React Hook Form',
-          'Zod',
-        ],
-      },
-      {
-        label: 'Тесты и качество',
-        variant: 'neutral',
-        tags: ['Vitest', 'Storybook', 'Git', 'CI/CD', 'Feature-Sliced Design'],
-      },
-      {
-        label: 'Backend-смежное',
-        variant: 'neutral',
-        tags: [
-          'Node.js',
-          'Express',
-          'PHP',
-          'Laravel',
-          'PostgreSQL',
-          'MySQL',
-          'Docker',
-          'Cloudinary',
-        ],
-      },
-    ] satisfies Category[],
   },
   en: {
     kicker: 'Skills',
     headingStart: 'Tools',
     headingEnd: 'I use to solve problems every day',
     alsoLabel: 'Also worked with:',
-    categories: [
-      {
-        label: 'Core',
-        variant: 'accent',
-        tags: ['React', 'TypeScript', 'Next.js', 'JavaScript (ES6+)', 'HTML5'],
-      },
-      {
-        label: 'State & Data',
-        variant: 'accent2',
-        tags: [
-          'Redux Toolkit',
-          'RTK Query',
-          'REST API',
-          'SSR / Hydration',
-          'client-side caching',
-          'React Hook Form',
-          'Zod',
-        ],
-      },
-      {
-        label: 'Testing & Quality',
-        variant: 'neutral',
-        tags: ['Vitest', 'Storybook', 'Git', 'CI/CD', 'Feature-Sliced Design'],
-      },
-      {
-        label: 'Backend-adjacent',
-        variant: 'neutral',
-        tags: [
-          'Node.js',
-          'Express',
-          'PHP',
-          'Laravel',
-          'PostgreSQL',
-          'MySQL',
-          'Docker',
-          'Cloudinary',
-        ],
-      },
-    ] satisfies Category[],
   },
 };
 
@@ -116,7 +33,7 @@ export function Skills() {
         <span className={styles.commaThin}>,</span> {copy.headingEnd}
       </h2>
       <div className={styles.rows}>
-        {copy.categories.map((category) => (
+        {SKILL_CATEGORIES[lang].map((category) => (
           <div key={category.label} className={styles.row}>
             <div className={styles.label}>{category.label}</div>
             <div className={styles.tags}>
