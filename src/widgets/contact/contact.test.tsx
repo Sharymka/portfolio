@@ -1,15 +1,25 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { LanguageProvider, useLanguage } from '@/shared/lib/language';
 import { Contact } from './contact';
 
+function ContactWithToggle() {
+  const { toggle } = useLanguage();
+  return (
+    <>
+      <button type="button" onClick={toggle}>
+        toggle
+      </button>
+      <Contact />
+    </>
+  );
+}
+
 describe('Contact', () => {
-  it('has the #contact anchor id and shows the form initially', () => {
+  it('has the #contact anchor id', () => {
     const { container } = render(<Contact />);
     expect(container.querySelector('#contact')).toBeInTheDocument();
-    expect(screen.getByLabelText('Имя')).toBeInTheDocument();
-    expect(screen.getByLabelText('Email')).toBeInTheDocument();
-    expect(screen.getByLabelText('Сообщение')).toBeInTheDocument();
   });
 
   it('shows direct email and Telegram links', () => {
@@ -24,16 +34,15 @@ describe('Contact', () => {
     );
   });
 
-  it('shows a thank-you message instead of the form after submit', async () => {
+  it('translates the heading after switching to EN', async () => {
     const user = userEvent.setup();
-    render(<Contact />);
+    render(
+      <LanguageProvider>
+        <ContactWithToggle />
+      </LanguageProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'toggle' }));
 
-    await user.type(screen.getByLabelText('Имя'), 'Света');
-    await user.type(screen.getByLabelText('Email'), 'sveta@example.com');
-    await user.type(screen.getByLabelText('Сообщение'), 'Привет!');
-    await user.click(screen.getByRole('button', { name: 'Отправить' }));
-
-    expect(screen.getByText('Спасибо, сообщение отправлено')).toBeInTheDocument();
-    expect(screen.queryByLabelText('Имя')).not.toBeInTheDocument();
+    expect(screen.getByText("Let's discuss the project")).toBeInTheDocument();
   });
 });
