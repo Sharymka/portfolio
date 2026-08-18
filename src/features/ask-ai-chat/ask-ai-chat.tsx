@@ -1,14 +1,25 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 import { useLanguage } from '@/shared/lib/language';
-import { answerFor, QA_DATA } from './model/qa-data';
 import styles from './ask-ai-chat.module.scss';
 
-interface Message {
-  role: 'ai' | 'user';
-  text: string;
-}
+const QUICK_PROMPTS = {
+  ru: [
+    'Как ты подходишь к сложным задачам на фронте?',
+    'Каким кейсом ты больше всего гордишься?',
+    'Какой стек предпочитаешь?',
+    'Готова к переезду или удалёнке?',
+  ],
+  en: [
+    'How do you approach complex frontend problems?',
+    'Which case are you most proud of?',
+    "What's your preferred stack?",
+    'Are you open to relocation or remote work?',
+  ],
+};
 
 const COPY = {
   ru: {
@@ -16,55 +27,69 @@ const COPY = {
       'Привет! Спросите меня что-то обо мне и моей работе, или выберите готовый вопрос ниже.',
     placeholder: 'Спросите что-нибудь...',
     submitLabel: 'Отправить',
+    errorFallback: 'ИИ-ассистент временно недоступен, попробуйте позже, или напишите мне напрямую.',
   },
   en: {
     startingMessage:
       'Hi! Ask me something about me and my work, or pick one of the ready-made questions below.',
     placeholder: 'Ask something...',
     submitLabel: 'Send',
+    errorFallback:
+      'The AI assistant is temporarily unavailable, please try again later, or message me directly.',
   },
 };
 
 export function AskAiChat() {
   const { lang } = useLanguage();
   const copy = COPY[lang];
-  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const allMessages = [{ role: 'ai' as const, text: copy.startingMessage }, ...messages];
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({ api: '/api/chat' }),
+  });
+  const busy = status === 'submitted' || status === 'streaming';
 
-  function respondTo(question: string, answer: string) {
-    setMessages((prev) => [...prev, { role: 'user', text: question }]);
-    setTimeout(() => {
-      setMessages((prev) => [...prev, { role: 'ai', text: answer }]);
-    }, 300);
+  function ask(text: string) {
+    if (busy) return;
+    sendMessage({ text }, { body: { lang } });
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const text = input.trim();
     if (!text) return;
-    respondTo(text, answerFor(text, lang));
+    ask(text);
     setInput('');
   }
 
   return (
     <div className={styles.card}>
       <div className={styles.messages}>
-        {allMessages.map((m, i) => (
-          <div key={i} className={m.role === 'user' ? styles.rowUser : styles.rowAi}>
-            <div className={m.role === 'user' ? styles.bubbleUser : styles.bubbleAi}>{m.text}</div>
+        <div className={styles.rowAi}>
+          <div className={styles.bubbleAi}>{copy.startingMessage}</div>
+        </div>
+        {messages.map((m) => (
+          <div key={m.id} className={m.role === 'user' ? styles.rowUser : styles.rowAi}>
+            <div className={m.role === 'user' ? styles.bubbleUser : styles.bubbleAi}>
+              {m.parts.map((part) => (part.type === 'text' ? part.text : '')).join('')}
+            </div>
           </div>
         ))}
+        {error && (
+          <div className={styles.rowAi}>
+            <div className={styles.bubbleAi}>{copy.errorFallback}</div>
+          </div>
+        )}
       </div>
       <div className={styles.prompts}>
-        {QA_DATA[lang].map((qa) => (
+        {QUICK_PROMPTS[lang].map((question) => (
           <button
-            key={qa.question}
+            key={question}
             type="button"
             className={styles.promptButton}
-            onClick={() => respondTo(qa.question, qa.answer)}
+            onClick={() => ask(question)}
+            disabled={busy}
           >
-            {qa.question}
+            {question}
           </button>
         ))}
       </div>
@@ -75,8 +100,14 @@ export function AskAiChat() {
           placeholder={copy.placeholder}
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          disabled={busy}
         />
-        <button type="submit" className={styles.submit} aria-label={copy.submitLabel}>
+        <button
+          type="submit"
+          className={styles.submit}
+          aria-label={copy.submitLabel}
+          disabled={busy}
+        >
           <svg
             width="16"
             height="16"
