@@ -87,4 +87,30 @@ describe('POST /api/chat', () => {
     expect(response.status).toBe(400);
     expect(streamTextMock).not.toHaveBeenCalled();
   });
+
+  it('returns 400 without calling the model when the body is malformed JSON', async () => {
+    limitMock.mockResolvedValue({ success: true });
+
+    const request = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      body: '{not valid json',
+      headers: { 'x-forwarded-for': '1.2.3.4' },
+    });
+
+    const response = await POST(request);
+
+    expect(response.status).toBe(400);
+    expect(streamTextMock).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 without calling the model when messages is missing or not an array', async () => {
+    limitMock.mockResolvedValue({ success: true });
+
+    const request = makeRequest({ lang: 'ru' });
+
+    const response = await POST(request);
+
+    expect(response.status).toBe(400);
+    expect(streamTextMock).not.toHaveBeenCalled();
+  });
 });

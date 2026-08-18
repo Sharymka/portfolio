@@ -19,7 +19,17 @@ function lastMessageText(messages: UIMessage[]): string {
 }
 
 export async function POST(req: Request) {
-  const { messages, lang }: { messages: UIMessage[]; lang: Lang } = await req.json();
+  let body: { messages: UIMessage[]; lang: Lang };
+  try {
+    body = await req.json();
+  } catch {
+    return new Response(null, { status: 400 });
+  }
+  const { messages, lang } = body;
+
+  if (!Array.isArray(messages)) {
+    return new Response(null, { status: 400 });
+  }
 
   const ip = req.headers.get('x-forwarded-for') ?? 'anonymous';
   const { success } = await ratelimit.limit(ip);
