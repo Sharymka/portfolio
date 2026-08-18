@@ -3,17 +3,13 @@
 import type { ReactNode } from 'react';
 import { revealStyle, useReveal } from '@/shared/lib/use-reveal';
 import { useLanguage } from '@/shared/lib/language';
+import { THINK_PRINCIPLES } from '@/entities/think';
 import styles from './think.module.scss';
 
 interface ItemMeta {
   gradient: string;
   radius: string;
   icon: ReactNode;
-}
-
-interface ItemCopy {
-  title: string;
-  body: string;
 }
 
 const ITEM_META: ItemMeta[] = [
@@ -58,40 +54,12 @@ const COPY = {
     headingStart: 'Инженерный подход',
     headingEnd: 'а не просто реализация',
     lead: 'Каждое техническое решение принимаю с учетом требований продукта, ограничений проекта и долгосрочной поддержки кода.',
-    items: [
-      {
-        title: 'Сначала понимаю ограничения',
-        body: 'Прежде чем выбирать решение, определяю требования, ограничения и то, что нельзя менять.',
-      },
-      {
-        title: 'Простота — по умолчанию',
-        body: 'Выбираю самое простое решение и усложняю его только тогда, когда это действительно необходимо.',
-      },
-      {
-        title: 'Думаю о развитии проекта',
-        body: 'Предпочитаю решения, которые легко поддерживать, расширять и при необходимости изменить.',
-      },
-    ] satisfies ItemCopy[],
   },
   en: {
     kicker: 'How I think',
     headingStart: 'An engineering approach',
     headingEnd: 'not just implementation',
     lead: 'I make every technical decision with product requirements, project constraints, and long-term maintainability in mind.',
-    items: [
-      {
-        title: 'I understand the constraints first',
-        body: "Before picking a solution, I define the requirements, constraints, and what can't be changed.",
-      },
-      {
-        title: 'Simplicity by default',
-        body: "I choose the simplest solution and only add complexity when it's truly necessary.",
-      },
-      {
-        title: "I think about the project's growth",
-        body: 'I prefer solutions that are easy to maintain, extend, and change when needed.',
-      },
-    ] satisfies ItemCopy[],
   },
 };
 
@@ -112,7 +80,7 @@ export function Think() {
       </div>
       <div className={styles.items}>
         {ITEM_META.map((meta, i) => {
-          const item = copy.items[i];
+          const item = THINK_PRINCIPLES[lang][i];
           return (
             <div key={item.title} className={styles.item}>
               <div
