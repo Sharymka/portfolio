@@ -34,16 +34,7 @@ export const SKILL_CATEGORIES: Record<Lang, SkillCategory[]> = {
     {
       label: 'Backend-смежное',
       variant: 'neutral',
-      tags: [
-        'Node.js',
-        'Express',
-        'PHP',
-        'Laravel',
-        'PostgreSQL',
-        'MySQL',
-        'Docker',
-        'Cloudinary',
-      ],
+      tags: ['Node.js', 'Express', 'PHP', 'Laravel', 'PostgreSQL', 'MySQL', 'Docker', 'Cloudinary'],
     },
   ],
   en: [
@@ -73,16 +64,7 @@ export const SKILL_CATEGORIES: Record<Lang, SkillCategory[]> = {
     {
       label: 'Backend-adjacent',
       variant: 'neutral',
-      tags: [
-        'Node.js',
-        'Express',
-        'PHP',
-        'Laravel',
-        'PostgreSQL',
-        'MySQL',
-        'Docker',
-        'Cloudinary',
-      ],
+      tags: ['Node.js', 'Express', 'PHP', 'Laravel', 'PostgreSQL', 'MySQL', 'Docker', 'Cloudinary'],
     },
   ],
 };
