@@ -1,16 +1,21 @@
 import { google } from '@ai-sdk/google';
-import { streamText, convertToModelMessages, type UIMessage } from 'ai';
+import {
+  streamText,
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  APICallError,
+  type UIMessage,
+} from 'ai';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { buildSystemPrompt } from '@/features/ask-ai-chat/model/system-prompt';
+import { MAX_MESSAGE_LENGTH } from '@/features/ask-ai-chat/model/limits';
 import type { Lang } from '@/shared/lib/language';
 
 export const maxDuration = 30;
 
-const MAX_MESSAGE_LENGTH = 500;
 const MAX_MESSAGES = 40;
-
-type ErrorReason = 'rate_limited' | 'invalid_request' | 'service_unavailable';
 
 // Checked once at module load. If Upstash isn't provisioned (today's actual
 // state), we must not attempt to construct a real client or hit the network
@@ -22,11 +27,46 @@ const hasUpstashConfig = Boolean(
 const ratelimit = hasUpstashConfig
   ? new Ratelimit({
       redis: Redis.fromEnv(),
-      limiter: Ratelimit.slidingWindow(10, '10 m'),
+      // 25, not the original 10 — a genuinely curious visitor easily sends
+      // that many messages in one sitting; the limit exists to stop abuse,
+      // not to interrupt an ordinary conversation.
+      limiter: Ratelimit.slidingWindow(25, '10 m'),
     })
   : null;
 
-function errorResponse(status: number, error: ErrorReason): Response {
+class ChatError extends Error {
+  constructor(code: 'rate_limited' | 'service_unavailable') {
+    super(code);
+  }
+}
+
+/**
+ * Maps whatever went wrong to a short code — never a full sentence. The
+ * client (ask-ai-chat.tsx) owns the RU/EN wording for each code, so this
+ * function's job is only to classify.
+ *
+ * Distinguishing Gemini's own per-minute vs per-day quota is best-effort:
+ * Google returns a 429 with a quota-metric identifier in the response body
+ * that conventionally contains "PerMinute" or "PerDay", but that convention
+ * isn't a documented guarantee for this specific API. An unrecognized 429
+ * falls back to a generic "the AI is busy" code rather than guessing which
+ * one it was.
+ */
+function classifyError(error: unknown): string {
+  if (error instanceof ChatError) {
+    return error.message;
+  }
+  if (APICallError.isInstance(error) && error.statusCode === 429) {
+    const body = error.responseBody ?? '';
+    if (/perday|\bdaily\b/i.test(body)) return 'gemini_rate_limited_day';
+    if (/perminute/i.test(body)) return 'gemini_rate_limited_minute';
+    return 'gemini_rate_limited';
+  }
+  console.error('Unhandled /api/chat error:', error);
+  return 'unknown_error';
+}
+
+function errorResponse(status: number, error: string): Response {
   return new Response(JSON.stringify({ error }), {
     status,
     headers: { 'Content-Type': 'application/json' },
@@ -104,28 +144,34 @@ export async function POST(req: Request) {
     return errorResponse(400, 'invalid_request');
   }
 
-  if (!ratelimit) {
-    return errorResponse(503, 'service_unavailable');
-  }
-
-  const ip = req.headers.get('x-forwarded-for') ?? 'anonymous';
-  let success: boolean;
-  try {
-    ({ success } = await ratelimit.limit(ip));
-  } catch {
-    return errorResponse(503, 'service_unavailable');
-  }
-  if (!success) {
-    return errorResponse(429, 'rate_limited');
-  }
-
   const lang = narrowLang(body.lang);
 
-  const result = streamText({
-    model: google('gemini-3.5-flash-lite'),
-    system: buildSystemPrompt(lang),
-    messages: await convertToModelMessages(messages),
+  const stream = createUIMessageStream({
+    execute: async ({ writer }) => {
+      if (!ratelimit) {
+        throw new ChatError('service_unavailable');
+      }
+
+      const ip = req.headers.get('x-forwarded-for') ?? 'anonymous';
+      let success: boolean;
+      try {
+        ({ success } = await ratelimit.limit(ip));
+      } catch {
+        throw new ChatError('service_unavailable');
+      }
+      if (!success) {
+        throw new ChatError('rate_limited');
+      }
+
+      const result = streamText({
+        model: google('gemini-3.5-flash-lite'),
+        system: buildSystemPrompt(lang),
+        messages: await convertToModelMessages(messages),
+      });
+      writer.merge(result.toUIMessageStream());
+    },
+    onError: classifyError,
   });
 
-  return result.toUIMessageStreamResponse();
+  return createUIMessageStreamResponse({ stream });
 }

@@ -114,7 +114,7 @@ describe('AskAiChat', () => {
     expect(screen.getByText('что такое **markdown**?')).toBeInTheDocument();
   });
 
-  it('shows the error fallback when the chat errors', () => {
+  it('shows the generic error fallback for an unrecognized error code', () => {
     mockChatState.error = new Error('network error');
     render(<AskAiChat />);
     expect(
@@ -122,6 +122,44 @@ describe('AskAiChat', () => {
         'Не получилось отправить сообщение — возможно, вопросов было слишком много, или ассистент временно недоступен. Попробуйте через несколько минут или напишите мне напрямую.',
       ),
     ).toBeInTheDocument();
+  });
+
+  it('shows a distinct message for our own rate limit', () => {
+    mockChatState.error = new Error('rate_limited');
+    render(<AskAiChat />);
+    expect(screen.getByText(/Вы задали уже немало вопросов подряд/)).toBeInTheDocument();
+  });
+
+  it('shows a distinct message for Gemini per-minute quota exhaustion', () => {
+    mockChatState.error = new Error('gemini_rate_limited_minute');
+    render(<AskAiChat />);
+    expect(screen.getByText(/подождите примерно минуту/)).toBeInTheDocument();
+  });
+
+  it('shows a distinct message for Gemini per-day quota exhaustion', () => {
+    mockChatState.error = new Error('gemini_rate_limited_day');
+    render(<AskAiChat />);
+    expect(screen.getByText(/дневной лимит вопросов к ИИ на сегодня исчерпан/)).toBeInTheDocument();
+  });
+
+  it('rejects a message over 500 characters instead of sending it', async () => {
+    const user = userEvent.setup();
+    render(<AskAiChat />);
+    const longText = 'a'.repeat(501);
+
+    const input = screen.getByPlaceholderText('Спросите что-нибудь...');
+    await user.click(input);
+    await user.paste(longText);
+
+    expect(
+      screen.getByText('Слишком длинное сообщение — сократите до 500 символов.'),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Отправить' })).toBeDisabled();
+
+    // Even if submission were triggered another way (e.g. Enter), the
+    // handler itself guards against sending an over-limit message.
+    await user.keyboard('{Enter}');
+    expect(sendMessageMock).not.toHaveBeenCalled();
   });
 
   it('disables input and prompt buttons while a response is streaming', () => {
