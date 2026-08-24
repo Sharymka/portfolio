@@ -57,6 +57,14 @@ describe('CaseCarousel', () => {
     expect(screen.getByRole('dialog')).toHaveFocus();
   });
 
+  it('marks the blurred backdrop copy of the image as decorative', () => {
+    render(<CaseCarousel images={IMAGES} title="Альфа" initialIndex={0} onClose={vi.fn()} />);
+    // Portalled to document.body, so it's outside the render container.
+    const decorativeImages = document.querySelectorAll('img[aria-hidden="true"]');
+    expect(decorativeImages).toHaveLength(1);
+    expect(decorativeImages[0]).toHaveAttribute('alt', '');
+  });
+
   it('translates control labels after switching to EN', async () => {
     const user = userEvent.setup();
     function CarouselWithToggle() {
