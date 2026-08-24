@@ -35,6 +35,35 @@
 .bubbleAi {
   background: var(--color-bg);
   color: var(--color-text);
+
+  // The AI's reply is rendered from Markdown (react-markdown), so its
+  // paragraphs/lists need their own spacing — this bubble is their only
+  // parent, nothing else in the app renders Markdown into a chat bubble.
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: var(--space-2);
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  ul,
+  ol {
+    margin: var(--space-2) 0 0;
+    padding-left: 1.25em;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+
+  li::marker {
+    color: var(--color-accent-700);
+  }
 }
 
 .bubbleUser {

@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
+import ReactMarkdown from 'react-markdown';
 import { useLanguage } from '@/shared/lib/language';
 import styles from './ask-ai-chat.module.scss';
 
@@ -68,13 +69,16 @@ export function AskAiChat() {
         <div className={styles.rowAi}>
           <div className={styles.bubbleAi}>{copy.startingMessage}</div>
         </div>
-        {messages.map((m) => (
-          <div key={m.id} className={m.role === 'user' ? styles.rowUser : styles.rowAi}>
-            <div className={m.role === 'user' ? styles.bubbleUser : styles.bubbleAi}>
-              {m.parts.map((part) => (part.type === 'text' ? part.text : '')).join('')}
+        {messages.map((m) => {
+          const text = m.parts.map((part) => (part.type === 'text' ? part.text : '')).join('');
+          return (
+            <div key={m.id} className={m.role === 'user' ? styles.rowUser : styles.rowAi}>
+              <div className={m.role === 'user' ? styles.bubbleUser : styles.bubbleAi}>
+                {m.role === 'user' ? text : <ReactMarkdown>{text}</ReactMarkdown>}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {error && (
           <div className={styles.rowAi}>
             <div className={styles.bubbleAi}>{copy.errorFallback}</div>

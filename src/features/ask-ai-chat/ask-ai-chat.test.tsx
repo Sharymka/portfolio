@@ -93,6 +93,27 @@ describe('AskAiChat', () => {
     expect(screen.getByText('React и TypeScript')).toBeInTheDocument();
   });
 
+  it('renders markdown formatting in assistant replies instead of literal asterisks', () => {
+    mockChatState.messages = [
+      {
+        id: '1',
+        role: 'assistant',
+        parts: [{ type: 'text', text: 'Мой стек — **React** и **TypeScript**.' }],
+      },
+    ];
+    render(<AskAiChat />);
+    expect(screen.getByText('React', { selector: 'strong' })).toBeInTheDocument();
+    expect(screen.queryByText(/\*\*/)).not.toBeInTheDocument();
+  });
+
+  it('does not parse user-typed text as markdown', () => {
+    mockChatState.messages = [
+      { id: '1', role: 'user', parts: [{ type: 'text', text: 'что такое **markdown**?' }] },
+    ];
+    render(<AskAiChat />);
+    expect(screen.getByText('что такое **markdown**?')).toBeInTheDocument();
+  });
+
   it('shows the error fallback when the chat errors', () => {
     mockChatState.error = new Error('network error');
     render(<AskAiChat />);
