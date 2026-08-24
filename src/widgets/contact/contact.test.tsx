@@ -34,6 +34,28 @@ describe('Contact', () => {
     );
   });
 
+  it('copies the email to the clipboard and shows confirmation', async () => {
+    const user = userEvent.setup({ writeToClipboard: true });
+    render(<Contact />);
+
+    await user.click(screen.getByRole('button', { name: 'Скопировать email' }));
+
+    await expect(navigator.clipboard.readText()).resolves.toBe('sveta.sharymova@gmail.com');
+    expect(await screen.findByRole('button', { name: 'Скопировано' })).toBeInTheDocument();
+  });
+
+  it('reverts the confirmation back to the copy label after a couple of seconds', async () => {
+    const user = userEvent.setup();
+    render(<Contact />);
+
+    await user.click(screen.getByRole('button', { name: 'Скопировать email' }));
+    await screen.findByRole('button', { name: 'Скопировано' });
+
+    expect(
+      await screen.findByRole('button', { name: 'Скопировать email' }, { timeout: 3000 }),
+    ).toBeInTheDocument();
+  });
+
   it('translates the heading after switching to EN', async () => {
     const user = userEvent.setup();
     render(
