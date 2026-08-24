@@ -5,9 +5,12 @@ import { LanguageProvider, useLanguage } from '@/shared/lib/language';
 import { DocumentPreview } from './document-preview';
 
 describe('DocumentPreview', () => {
-  it('shows the document in an iframe pointed at the file', () => {
+  it('shows the document in an iframe pointed at the file, with the native PDF toolbar hidden', () => {
     render(<DocumentPreview href="/documents/resume.pdf" label="Резюме (PDF)" onClose={vi.fn()} />);
-    expect(screen.getByTitle('Резюме (PDF)')).toHaveAttribute('src', '/documents/resume.pdf');
+    expect(screen.getByTitle('Резюме (PDF)')).toHaveAttribute(
+      'src',
+      '/documents/resume.pdf#toolbar=0',
+    );
   });
 
   it('offers a real download link for the same file', () => {

@@ -37,7 +37,10 @@ describe('Documents', () => {
     await user.click(screen.getByRole('button', { name: /Диплом/ }));
 
     expect(screen.getByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByTitle('Диплом (PDF)')).toHaveAttribute('src', '/documents/diploma.pdf');
+    expect(screen.getByTitle('Диплом (PDF)')).toHaveAttribute(
+      'src',
+      '/documents/diploma.pdf#toolbar=0',
+    );
   });
 
   it('closes the preview from its close button', async () => {
