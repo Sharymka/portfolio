@@ -6,8 +6,8 @@ import { useLanguage } from '@/shared/lib/language';
 import styles from './document-preview.module.scss';
 
 const COPY = {
-  ru: { close: 'Закрыть', download: 'Скачать' },
-  en: { close: 'Close', download: 'Download' },
+  ru: { close: 'Закрыть' },
+  en: { close: 'Close' },
 };
 
 interface DocumentPreviewProps {
@@ -32,17 +32,9 @@ export function DocumentPreview({ href, label, onClose }: DocumentPreviewProps) 
         return;
       }
       if (event.key === 'Tab') {
-        const focusables = dialogRef.current?.querySelectorAll<HTMLElement>('a, button');
-        if (!focusables || focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
+        // Only one focusable control (close) — keep Tab from leaving the dialog.
+        event.preventDefault();
+        dialogRef.current?.querySelector<HTMLElement>('button')?.focus();
       }
     }
     document.addEventListener('keydown', handleKeyDown);
@@ -66,22 +58,6 @@ export function DocumentPreview({ href, label, onClose }: DocumentPreviewProps) 
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.controls}>
-          <a href={href} download className={styles.download} aria-label={copy.download}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 3v13" />
-              <path d="m7 11 5 5 5-5" />
-              <path d="M5 21h14" />
-            </svg>
-          </a>
           <button type="button" className={styles.close} aria-label={copy.close} onClick={onClose}>
             <svg
               width="16"

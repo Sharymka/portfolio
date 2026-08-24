@@ -10,11 +10,9 @@ describe('DocumentPreview', () => {
     expect(screen.getByTitle('Резюме (PDF)')).toHaveAttribute('src', '/documents/resume.pdf');
   });
 
-  it('offers a real download link for the same file', () => {
+  it('does not duplicate the browser-native PDF viewer download button', () => {
     render(<DocumentPreview href="/documents/resume.pdf" label="Резюме (PDF)" onClose={vi.fn()} />);
-    const downloadLink = screen.getByRole('link', { name: 'Скачать' });
-    expect(downloadLink).toHaveAttribute('href', '/documents/resume.pdf');
-    expect(downloadLink).toHaveAttribute('download');
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
 
   it('calls onClose on Escape and on the close button', async () => {
@@ -55,6 +53,5 @@ describe('DocumentPreview', () => {
     await user.click(screen.getByRole('button', { name: 'toggle' }));
 
     expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Download' })).toBeInTheDocument();
   });
 });
