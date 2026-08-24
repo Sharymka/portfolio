@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LanguageProvider, useLanguage } from '@/shared/lib/language';
@@ -49,6 +49,26 @@ describe('Documents', () => {
 
     await user.click(screen.getByRole('button', { name: 'Закрыть' }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('downloads the file directly instead of opening the preview on mobile', async () => {
+    vi.stubGlobal('matchMedia', (query: string) => ({
+      matches: true,
+      media: query,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    }));
+    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+    const user = userEvent.setup();
+    render(<Documents />);
+
+    await user.click(screen.getByRole('button', { name: /Диплом/ }));
+
+    expect(clickSpy).toHaveBeenCalledOnce();
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    clickSpy.mockRestore();
+    vi.unstubAllGlobals();
   });
 
   it('translates the heading and file labels after switching to EN', async () => {

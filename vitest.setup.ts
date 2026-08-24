@@ -16,3 +16,18 @@ if (!('IntersectionObserver' in globalThis)) {
     value: IntersectionObserverStub,
   });
 }
+
+// jsdom's own matchMedia throws "not implemented" when called, rather than
+// being absent — so it must be overridden unconditionally, unlike
+// IntersectionObserver above. Default to "no match" (desktop); tests that
+// need a specific viewport override via vi.stubGlobal.
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  configurable: true,
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }),
+});

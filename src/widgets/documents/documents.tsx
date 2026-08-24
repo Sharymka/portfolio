@@ -27,11 +27,28 @@ const COPY = {
   },
 };
 
+const MOBILE_MEDIA_QUERY = '(max-width: 768px)';
+
+function downloadFile(href: string) {
+  const link = document.createElement('a');
+  link.href = href;
+  link.download = '';
+  link.click();
+}
+
 export function Documents() {
   const { ref, visible } = useReveal<HTMLElement>();
   const { lang } = useLanguage();
   const copy = COPY[lang];
   const [openFile, setOpenFile] = useState<{ href: string; label: string } | null>(null);
+
+  function openOrDownload(file: { href: string; label: string }) {
+    if (window.matchMedia(MOBILE_MEDIA_QUERY).matches) {
+      downloadFile(file.href);
+    } else {
+      setOpenFile(file);
+    }
+  }
 
   return (
     <section id="documents" ref={ref} className={styles.section} style={revealStyle(visible)}>
@@ -43,7 +60,7 @@ export function Documents() {
             key={file.href}
             type="button"
             className={styles.card}
-            onClick={() => setOpenFile(file)}
+            onClick={() => openOrDownload(file)}
           >
             <span className={styles.icon}>
               <svg

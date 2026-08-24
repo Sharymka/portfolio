@@ -23,6 +23,12 @@
   align-items: center;
   flex-wrap: wrap;
   gap: clamp(10px, 3vw, 17.6px);
+
+  // On narrow phones the 5 links need a tighter gap to all fit on one row
+  // instead of the last one wrapping onto a line of its own.
+  @media (max-width: 400px) {
+    gap: 6px;
+  }
 }
 
 .link {
