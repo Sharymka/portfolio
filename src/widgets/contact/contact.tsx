@@ -22,47 +22,6 @@ const COPY = {
   },
 };
 
-const DIRECT_LINKS = [
-  {
-    label: 'Email',
-    href: `mailto:${EMAIL}`,
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="2" y="4" width="20" height="16" rx="2" />
-        <path d="m22 7-10 7L2 7" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Telegram',
-    href: 'https://t.me/svetka_khai',
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="m22 2-7 20-4-9-9-4Z" />
-        <path d="M22 2 11 13" />
-      </svg>
-    ),
-  },
-];
-
 export function Contact() {
   const { ref, visible } = useReveal<HTMLElement>();
   const { lang } = useLanguage();
@@ -76,7 +35,7 @@ export function Contact() {
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // Clipboard API unavailable or permission denied (older browser,
-      // insecure context) — the mailto link above still works as a fallback,
+      // insecure context) — Telegram remains a working way to reach out,
       // so failing silently here is fine.
     }
   }
@@ -89,12 +48,24 @@ export function Contact() {
         <span className={styles.commaThin}>?</span>
       </h2>
       <div className={styles.directLinks}>
-        {DIRECT_LINKS.map((link) => (
-          <a key={link.label} href={link.href} className={styles.directLink}>
-            <span className={styles.directLinkIcon}>{link.icon}</span>
-            {link.label}
-          </a>
-        ))}
+        <a href="https://t.me/svetka_khai" className={styles.directLink}>
+          <span className={styles.directLinkIcon}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m22 2-7 20-4-9-9-4Z" />
+              <path d="M22 2 11 13" />
+            </svg>
+          </span>
+          Telegram
+        </a>
         <button
           type="button"
           className={styles.directLink}

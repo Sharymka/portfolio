@@ -22,16 +22,17 @@ describe('Contact', () => {
     expect(container.querySelector('#contact')).toBeInTheDocument();
   });
 
-  it('shows direct email and Telegram links', () => {
+  it('shows the direct Telegram link', () => {
     render(<Contact />);
-    expect(screen.getByRole('link', { name: /Email/ })).toHaveAttribute(
-      'href',
-      'mailto:sveta.sharymova@gmail.com',
-    );
     expect(screen.getByRole('link', { name: /Telegram/ })).toHaveAttribute(
       'href',
       'https://t.me/svetka_khai',
     );
+  });
+
+  it('does not show a direct mailto link', () => {
+    render(<Contact />);
+    expect(screen.queryByRole('link', { name: /Email/ })).not.toBeInTheDocument();
   });
 
   it('copies the email to the clipboard and shows confirmation', async () => {
