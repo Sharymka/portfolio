@@ -56,7 +56,12 @@ function isValidRole(role: unknown): role is 'user' | 'assistant' {
  * Validates the raw, untrusted `messages` payload from the request body.
  * Rejects anything that would otherwise crash later processing (missing
  * `parts`), bypass the system-prompt guardrails (a forged `role: "system"`
- * message), or blow past sane size/length limits.
+ * message), or blow past sane size limits. The length cap only applies to
+ * `user` messages — `assistant` messages are the model's own prior replies
+ * echoed back as conversation history by useChat, and routinely run longer
+ * than a single typed question (especially once Markdown formatting is in
+ * play), so capping them the same way would reject ordinary conversations
+ * a few turns in.
  */
 function parseMessages(value: unknown): UIMessage[] | null {
   if (!Array.isArray(value) || value.length === 0 || value.length > MAX_MESSAGES) {
@@ -70,7 +75,7 @@ function parseMessages(value: unknown): UIMessage[] | null {
     if (!isValidRole(message.role)) {
       return null;
     }
-    if (messageText(message.parts).length > MAX_MESSAGE_LENGTH) {
+    if (message.role === 'user' && messageText(message.parts).length > MAX_MESSAGE_LENGTH) {
       return null;
     }
   }

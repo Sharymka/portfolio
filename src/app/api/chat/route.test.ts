@@ -135,14 +135,14 @@ describe('POST /api/chat', () => {
     expect(streamTextMock).not.toHaveBeenCalled();
   });
 
-  it('returns 400 when an earlier (non-last) message exceeds the length limit', async () => {
+  it('returns 400 when an earlier (non-last) user message exceeds the length limit', async () => {
     limitMock.mockResolvedValue({ success: true });
     const longText = 'a'.repeat(501);
     const POST = await loadRoute(withUpstash);
 
     const request = makeRequest({
       messages: [
-        { id: '1', role: 'assistant', parts: [{ type: 'text', text: longText }] },
+        { id: '1', role: 'user', parts: [{ type: 'text', text: longText }] },
         { id: '2', role: 'user', parts: [{ type: 'text', text: 'ок' }] },
       ],
       lang: 'ru',
@@ -152,6 +152,31 @@ describe('POST /api/chat', () => {
 
     expect(response.status).toBe(400);
     expect(streamTextMock).not.toHaveBeenCalled();
+  });
+
+  it('does not reject a long assistant reply echoed back as history', async () => {
+    // useChat resends the whole conversation on every turn, so a prior AI
+    // reply longer than the per-message cap (routine once Markdown/lists
+    // are involved) must not block the next question.
+    limitMock.mockResolvedValue({ success: true });
+    const toUIMessageStreamResponse = vi.fn(() => new Response('ok'));
+    streamTextMock.mockReturnValue({ toUIMessageStreamResponse });
+    const longReply = 'a'.repeat(2000);
+    const POST = await loadRoute(withUpstash);
+
+    const request = makeRequest({
+      messages: [
+        { id: '1', role: 'user', parts: [{ type: 'text', text: 'Какой у тебя стек?' }] },
+        { id: '2', role: 'assistant', parts: [{ type: 'text', text: longReply }] },
+        { id: '3', role: 'user', parts: [{ type: 'text', text: 'А кейсы?' }] },
+      ],
+      lang: 'ru',
+    });
+
+    const response = await POST(request);
+
+    expect(response.status).toBe(200);
+    expect(streamTextMock).toHaveBeenCalledTimes(1);
   });
 
   it('returns 400 without calling the model when the body is malformed JSON', async () => {
