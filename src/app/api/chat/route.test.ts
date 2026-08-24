@@ -91,8 +91,8 @@ describe('POST /api/chat', () => {
     expect(streamTextMock).toHaveBeenCalledTimes(1);
     const call = streamTextMock.mock.calls[0][0] as { system: string; model: unknown };
     expect(call.system).toMatch(/русском/);
-    expect(call.model).toEqual({ modelId: 'gemini-2.5-flash-lite' });
-    expect(googleMock).toHaveBeenCalledWith('gemini-2.5-flash-lite');
+    expect(call.model).toEqual({ modelId: 'gemini-3.5-flash-lite' });
+    expect(googleMock).toHaveBeenCalledWith('gemini-3.5-flash-lite');
     expect(toUIMessageStreamResponse).toHaveBeenCalledTimes(1);
     expect(response).toBeInstanceOf(Response);
   });
