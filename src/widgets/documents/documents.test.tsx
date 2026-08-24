@@ -22,23 +22,33 @@ describe('Documents', () => {
     expect(container.querySelector('#documents')).toBeInTheDocument();
   });
 
-  it('links each document to its real file with a download attribute', () => {
+  it('renders a button per file, not a direct download link', () => {
     render(<Documents />);
-    expect(screen.getByRole('link', { name: /Резюме/ })).toHaveAttribute(
-      'href',
-      '/documents/resume.pdf',
-    );
-    expect(screen.getByRole('link', { name: /Диплом/ })).toHaveAttribute(
-      'href',
-      '/documents/diploma.pdf',
-    );
-    expect(screen.getByRole('link', { name: /Сертификат/ })).toHaveAttribute(
-      'href',
-      '/documents/certificate.pdf',
-    );
     for (const name of [/Резюме/, /Диплом/, /Сертификат/]) {
-      expect(screen.getByRole('link', { name })).toHaveAttribute('download');
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
     }
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+  });
+
+  it('opens the preview with the right file when a card is clicked', async () => {
+    const user = userEvent.setup();
+    render(<Documents />);
+
+    await user.click(screen.getByRole('button', { name: /Диплом/ }));
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByTitle('Диплом (PDF)')).toHaveAttribute('src', '/documents/diploma.pdf');
+  });
+
+  it('closes the preview from its close button', async () => {
+    const user = userEvent.setup();
+    render(<Documents />);
+
+    await user.click(screen.getByRole('button', { name: /Резюме/ }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Закрыть' }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
   it('translates the heading and file labels after switching to EN', async () => {
@@ -51,17 +61,8 @@ describe('Documents', () => {
     await user.click(screen.getByRole('button', { name: 'toggle' }));
 
     expect(screen.getByText('Resume and supporting documents')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Resume/ })).toHaveAttribute(
-      'href',
-      '/documents/resume.pdf',
-    );
-    expect(screen.getByRole('link', { name: /Diploma/ })).toHaveAttribute(
-      'href',
-      '/documents/diploma.pdf',
-    );
-    expect(screen.getByRole('link', { name: /Certificate/ })).toHaveAttribute(
-      'href',
-      '/documents/certificate.pdf',
-    );
+    expect(screen.getByRole('button', { name: /Resume/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Diploma/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Certificate/ })).toBeInTheDocument();
   });
 });

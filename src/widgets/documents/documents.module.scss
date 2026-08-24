@@ -24,11 +24,15 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3);
+  border: none;
   border-radius: var(--radius-md);
   background: var(--color-surface);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
   color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .icon {
