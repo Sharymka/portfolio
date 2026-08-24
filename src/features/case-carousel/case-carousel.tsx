@@ -95,8 +95,24 @@ export function CaseCarousel({ images, title, initialIndex, onClose }: CaseCarou
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.imageFrame}>
+          {/* Preloaded so the browser already has the neighboring
+              screenshots cached by the time next/prev is clicked — same
+              `sizes` as the visible images, so it's the exact URL that
+              gets reused, not just the raw file. */}
+          {[(index - 1 + images.length) % images.length, (index + 1) % images.length].map(
+            (neighborIndex) => (
+              <Image
+                key={`${images[neighborIndex]}-preload`}
+                src={images[neighborIndex]}
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="(max-width: 900px) 100vw, 900px"
+                className={styles.preload}
+              />
+            ),
+          )}
           <Image
-            key={`${images[index]}-bg`}
             src={images[index]}
             alt=""
             aria-hidden="true"

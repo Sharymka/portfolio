@@ -57,12 +57,26 @@ describe('CaseCarousel', () => {
     expect(screen.getByRole('dialog')).toHaveFocus();
   });
 
-  it('marks the blurred backdrop copy of the image as decorative', () => {
+  it('marks the blurred backdrop copy and the preloaded neighbors as decorative', () => {
     render(<CaseCarousel images={IMAGES} title="Альфа" initialIndex={0} onClose={vi.fn()} />);
     // Portalled to document.body, so it's outside the render container.
+    // One blurred backdrop copy of the current image + one preloaded copy
+    // each of the previous and next images (see the preload effect below).
     const decorativeImages = document.querySelectorAll('img[aria-hidden="true"]');
-    expect(decorativeImages).toHaveLength(1);
-    expect(decorativeImages[0]).toHaveAttribute('alt', '');
+    expect(decorativeImages).toHaveLength(3);
+    for (const img of decorativeImages) {
+      expect(img).toHaveAttribute('alt', '');
+    }
+  });
+
+  it('preloads the neighboring screenshots so next/prev has no loading gap', () => {
+    render(<CaseCarousel images={IMAGES} title="Альфа" initialIndex={0} onClose={vi.fn()} />);
+    const allSrcs = Array.from(document.querySelectorAll('img')).map((img) =>
+      decodeURIComponent(img.getAttribute('src') ?? ''),
+    );
+    // initialIndex 0: next is 02.png, prev wraps around to 03.png.
+    expect(allSrcs.some((src) => src.includes('auction/02.png'))).toBe(true);
+    expect(allSrcs.some((src) => src.includes('auction/03.png'))).toBe(true);
   });
 
   it('translates control labels after switching to EN', async () => {

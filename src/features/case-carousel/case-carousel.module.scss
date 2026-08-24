@@ -20,7 +20,15 @@
   height: min(70vh, 600px);
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-surface);
+  // Dark, not the site's warm --color-surface: this peeks through for a
+  // frame or two while a newly-navigated-to screenshot is still loading,
+  // and a dark flash blends into the modal instead of jarring against it.
+  background: var(--color-neutral-900);
+}
+
+.preload {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .imageBg {
