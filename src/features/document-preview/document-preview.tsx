@@ -98,10 +98,7 @@ export function DocumentPreview({ href, label, onClose }: DocumentPreviewProps) 
             </svg>
           </button>
         </div>
-        {/* #toolbar=0 hides the browser's own built-in PDF viewer toolbar
-            (Chrome/Edge honor this PDF open parameter) — otherwise it shows
-            its own download button on top of ours. */}
-        <iframe src={`${href}#toolbar=0`} title={label} className={styles.frame} />
+        <iframe src={href} title={label} className={styles.frame} />
       </div>
     </div>,
     document.body,

@@ -5,12 +5,9 @@ import { LanguageProvider, useLanguage } from '@/shared/lib/language';
 import { DocumentPreview } from './document-preview';
 
 describe('DocumentPreview', () => {
-  it('shows the document in an iframe pointed at the file, with the native PDF toolbar hidden', () => {
+  it('shows the document in an iframe pointed at the file', () => {
     render(<DocumentPreview href="/documents/resume.pdf" label="Резюме (PDF)" onClose={vi.fn()} />);
-    expect(screen.getByTitle('Резюме (PDF)')).toHaveAttribute(
-      'src',
-      '/documents/resume.pdf#toolbar=0',
-    );
+    expect(screen.getByTitle('Резюме (PDF)')).toHaveAttribute('src', '/documents/resume.pdf');
   });
 
   it('offers a real download link for the same file', () => {
