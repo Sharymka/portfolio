@@ -38,34 +38,38 @@ export function SiteNav() {
   return (
     <nav className={styles.nav}>
       <div className={styles.brand}>{copy.brand}</div>
-      {copy.links.map((link) => (
-        <a key={link.href} href={link.href} className={styles.link}>
-          {link.label}
-        </a>
-      ))}
-      <div className={styles.langToggle} role="group" aria-label={copy.langLabel}>
-        <button
-          type="button"
-          className={styles.langPill}
-          aria-pressed={lang === 'ru'}
-          data-active={lang === 'ru'}
-          onClick={() => setLang('ru')}
-        >
-          RU
-        </button>
-        <button
-          type="button"
-          className={styles.langPill}
-          aria-pressed={lang === 'en'}
-          data-active={lang === 'en'}
-          onClick={() => setLang('en')}
-        >
-          EN
-        </button>
+      <div className={styles.links}>
+        {copy.links.map((link) => (
+          <a key={link.href} href={link.href} className={styles.link}>
+            {link.label}
+          </a>
+        ))}
       </div>
-      <Button as="a" href="#contact" variant="primary" className={styles.cta}>
-        {copy.cta}
-      </Button>
+      <div className={styles.controls}>
+        <div className={styles.langToggle} role="group" aria-label={copy.langLabel}>
+          <button
+            type="button"
+            className={styles.langPill}
+            aria-pressed={lang === 'ru'}
+            data-active={lang === 'ru'}
+            onClick={() => setLang('ru')}
+          >
+            RU
+          </button>
+          <button
+            type="button"
+            className={styles.langPill}
+            aria-pressed={lang === 'en'}
+            data-active={lang === 'en'}
+            onClick={() => setLang('en')}
+          >
+            EN
+          </button>
+        </div>
+        <Button as="a" href="#contact" variant="primary" className={styles.cta}>
+          {copy.cta}
+        </Button>
+      </div>
     </nav>
   );
 }

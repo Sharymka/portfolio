@@ -9,6 +9,12 @@
 }
 
 .heading {
+  // Global h2 is a fixed 32px — fine everywhere else, but this heading's
+  // longest word ("подтверждающие") overflows the viewport on narrow
+  // phones at that size. Shrink responsively, and break as a last resort
+  // if an even longer translation ever doesn't fit even at the smaller size.
+  font-size: clamp(24px, 6vw, 32px);
+  overflow-wrap: break-word;
   margin-bottom: var(--space-4);
 }
 
